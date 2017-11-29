@@ -2,6 +2,7 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 export GOPATH=$HOME
+source ~/.git-prompt.sh
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f /Users/user/Downloads/google-cloud-sdk/path.bash.inc ]; then
