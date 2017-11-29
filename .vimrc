@@ -36,6 +36,8 @@ Plugin 'wakatime/vim-wakatime'
 Plugin 'fweep/vim-tabber'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rking/ag.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -94,3 +96,8 @@ set autochdir
 let didit = 0
 autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
 autocmd! InsertLeave * let didit = 0
+
+" Silver search
+let g:ag_working_path_mode="r"
+map <leader>s :Ag!<space>
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
