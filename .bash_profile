@@ -31,4 +31,7 @@ alias gpb='git push origin `git rev-parse --abbrev-ref HEAD`'
 alias gst='git status'
 alias gbr='git branch'
 alias gca='git commit -am'
+alias gc='git commit -m'
 alias gco='git checkout'
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

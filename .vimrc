@@ -56,10 +56,11 @@ filetype plugin indent on    " required
 "map <c-f> :call JsBeautify()<cr>
 map <c-f> :call RangeJsBeautify()<cr>
 let mapleader = ","
+map <leader>f :call JsBeautify()<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <c-o> :NERDTree<cr>
 nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
-nmap <leader>r :!node  %<cr>
+nmap <leader>r :w<CR>:!node  %<cr>
 set laststatus=2
 let g:lightline = {
       \ 'active': {
