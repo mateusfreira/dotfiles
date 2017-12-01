@@ -7,7 +7,7 @@ export ZSH=/Users/mateus/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="3den"
+ZSH_THEME="agnoster"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -60,6 +60,7 @@ ZSH_THEME="3den"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+#  node
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -95,3 +96,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+
+source "/Users/mateus/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
