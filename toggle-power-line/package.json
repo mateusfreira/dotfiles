@@ -1,0 +1,15 @@
+{
+  "name": "toggle-power-line",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.19.3",
+    "toggl-api": "^1.0.1"
+  }
+}
