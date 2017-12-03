@@ -59,7 +59,8 @@ let mapleader = ","
 map <leader>f :call JsBeautify()<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <c-o> :NERDTree<cr>
-nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
+"nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
+nmap <leader>t :call RunTestFile()<cr>
 nmap <leader>r :w<CR>:!node  %<cr>
 set laststatus=2
 let g:lightline = {
@@ -102,3 +103,25 @@ autocmd! InsertLeave * let didit = 0
 let g:ag_working_path_mode="r"
 map <leader>s :Ag!<space>
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+function! RunTests(filename)
+  :w
+  :silent !clear
+   exec ":!NODE_ENV=codeship mocha ".a:filename
+endfunction
+" Thanks https://github.com/chrishunt
+function! SetTestFile()
+   "set the spec file that tests will be run for.
+  " let g:grb_test_file=@% " Use the window scope project relative
+  let g:grb_test_file=expand('%:p')
+endfunction
+function! RunTestFile(...)
+	" run the tests for the previously-marked file.
+	let in_test_file = match(expand("%"), '\(spec.js\|test.js\)$') != -1
+	if in_test_file
+   		call SetTestFile()
+	elseif !exists("g:grb_test_file")
+  		return
+	end
+	call RunTests(g:grb_test_file)
+endfunction
+
