@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fitbit-node": "^2.0.5",
     "moment": "^2.19.3",
     "toggl-api": "^1.0.1"
   }

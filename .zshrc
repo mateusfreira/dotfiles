@@ -100,4 +100,10 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 source "/Users/mateus/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 source "/Users/mateus/tokens.sh" # Toggle and others
+alias gpb='git push origin `git rev-parse --abbrev-ref HEAD`'
+alias gst='git status'
+alias gbr='git branch'
+alias gca='git commit -am'
+alias gc='git commit -m'
+alias gco='git checkout'
 
