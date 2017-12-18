@@ -1,8 +1,8 @@
 set history=100         " keep 100 lines of history
- set ruler               " show the cursor position
- syntax on               " syntax highlighting
- set hlsearch            " highlight the last searched term
- filetype plugin on      " use the file type plugins
+set ruler               " show the cursor position
+syntax on               " syntax highlighting
+" set hlsearch            " highlight the last searched term
+filetype plugin on      " use the file type plugins
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 " :calil pathogen#infect()
 set number
@@ -38,6 +38,7 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
+" Plugin 'pangloss/vim-javascript'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -95,9 +96,9 @@ set backspace=indent,eol,start
 "Ser current directory to create file
 set autochdir
 "Desable the search hl on the insert mode
-let didit = 0
-autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
-autocmd! InsertLeave * let didit = 0
+"let didit = 0
+"autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
+"autocmd! InsertLeave * let didit = 0
 
 " Silver search
 let g:ag_working_path_mode="r"
@@ -124,4 +125,9 @@ function! RunTestFile(...)
 	end
 	call RunTests(g:grb_test_file)
 endfunction
+" auto reload after 4 seconds in coursor stop
+au CursorHold,CursorHoldI * checktime
+" Tags configs
 
+set tags+=tags;/
+nnoremap <leader>. :CtrlPTag<cr>
