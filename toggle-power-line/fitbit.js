@@ -6,11 +6,6 @@ const clientID = process.env.FTIBIT_CLIENT_ID,
     clientSecret = process.env.FITBIT_SECRET;
 const FitbitApiClient = require("fitbit-node");
 const fitbit = new FitbitApiClient(clientID, clientSecret);
-//console.log(fitbit.getAuthorizeUrl("activity", "http://localhost"));
-//fitbit.getAccessToken("528db05f5276d8879c12274439c0fb57c84ac366", 'http://localhost').then(function (result) {
-//i	console.log("here", result.access_token, result);
-//fs.writeFileSync(`${__dirname}/.fitbitTokey`, JSON.stringify(data));¬
-//}).catch(console.error);
 const togglLastRunFile = `${__dirname}/.fitbit-last-run`;
 const lastResultFile = `${__dirname}/.fitbit-last-result`
 let lastTime = fs.existsSync(togglLastRunFile) ? parseInt(fs.readFileSync(togglLastRunFile)) || 0 : 0;
