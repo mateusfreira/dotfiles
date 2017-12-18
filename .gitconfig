@@ -3,3 +3,5 @@
 # Please adapt and uncomment the following lines:
 	name = Mateus Santos
 	email = mateus.freira@gmail.com
+[core]
+	excludesfile = ~/.global_gitignore
