@@ -1,11 +1,35 @@
 db.getMongo().setReadPref('secondary')
 
+
+var oldFind = DBCollection.prototype.find;
+DBCollection.prototype.find = function(query, fields, limit, skip, batchSize, options) {
+    var isOrganization = this.toString().match(/organizations/);
+    var isCall = this.toString().match(/calls/);
+    if ((!query._organization && !query._id) && !isOrganization && isCall) {
+        throw "Add _organization or _id to your query";
+    }
+    if (!query.createdDate && isCall) {
+        throw "Add a createdDate to this query :)";
+    }
+    return oldFind.call(this, query, fields, limit, skip, batchSize, options);
+};
+
+var oldCount = DBCollection.prototype.count;
+DBCollection.prototype.count = function(query, fields, limit, skip, batchSize, options) {
+    var isOrganization = this.toString().match(/organizations/);
+    var isCall = this.toString().match(/calls/);
+    if (((!query._organization && !query._id) && !isOrganization)  && isCall)  {
+        throw "Add _organization or _id to your query";
+    }
+    if (!query.createdDate && this.toString().match(/calls/)) {
+        throw "Add a createdDate to this query :)";
+    }
+    return oldCount.call(this, query, fields, limit, skip, batchSize, options);
+};
+
+
 // Export to CSV function
-DBQuery.prototype.find = function() {
-	return {};
-}
-DBQuery.prototype.toCSV = function(deliminator, textQualifier)
-{
+DBQuery.prototype.toCSV = function(deliminator, textQualifier) {
     var count = -1;
     var headers = [];
     var data = {};
