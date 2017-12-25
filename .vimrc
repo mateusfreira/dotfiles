@@ -61,7 +61,8 @@ map <leader>f :call JsBeautify()<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <c-o> :NERDTree<cr>
 "nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
-nmap <leader>t :call RunTestFile()<cr>
+nmap <leader>t :call RunNearestTest()<cr>
+nmap <leader>y :call RunTestFile()<cr>
 nmap <leader>r :w<CR>:!node  %<cr>
 set laststatus=2
 let g:lightline = {
@@ -104,10 +105,10 @@ set autochdir
 let g:ag_working_path_mode="r"
 map <leader>s :Ag!<space>
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-function! RunTests(filename)
+function! RunTests(filename, complement)
   :w
   :silent !clear
-   exec ":!NODE_ENV=codeship mocha ".a:filename
+   exec ":!NODE_ENV=codeship mocha ".a:filename." ".a:complement
 endfunction
 " Thanks https://github.com/chrishunt
 function! SetTestFile()
@@ -115,15 +116,55 @@ function! SetTestFile()
   " let g:grb_test_file=@% " Use the window scope project relative
   let g:grb_test_file=expand('%:p')
 endfunction
+
 function! RunTestFile(...)
 	" run the tests for the previously-marked file.
 	let in_test_file = match(expand("%"), '\(spec.js\|test.js\)$') != -1
 	if in_test_file
-   		call SetTestFile()
+	   call SetTestFile()
 	elseif !exists("g:grb_test_file")
   		return
 	end
-	call RunTests(g:grb_test_file)
+	call RunTests(g:grb_test_file, "")
+endfunction
+
+
+
+function! GetNearestTest()
+  let callLine = line (".")           "cursor line
+  let file = readfile(expand("%:p"))  "read current file
+  let lineCount = 0                   "file line counter
+  let lineDiff = 999                  "arbituary large number
+  let descPattern = '\v<(it|describe|context)\s*\(?\s*[''"](.*)[''"]\s*,'
+  for line in file
+    let lineCount += 1
+    let match = match(line,descPattern)
+    if(match != -1)
+      let currentDiff = callLine - lineCount
+      " break if closest test is the next test
+      if(currentDiff < 0 && lineDiff != 999)
+        break
+      endif
+      " if closer test is found, cache new nearest test
+      if(currentDiff <= lineDiff)
+        let lineDiff = currentDiff
+        let s:nearestTest = substitute(matchlist(line,descPattern)[2],'\v([''"()])','(.{1})','g')
+      endif
+    endif
+  endfor
+endfunction
+
+function! RunNearestTest(...)
+	" run the tests for the previously-marked file.
+	let in_test_file = match(expand("%"), '\(spec.js\|test.js\)$') != -1
+	if in_test_file
+		call SetTestFile()
+   		call GetNearestTest()
+	elseif !exists("g:grb_test_file")
+  		return
+	end
+	echom s:nearestTest
+	call RunTests(g:grb_test_file, " -g '".s:nearestTest."'")
 endfunction
 " auto reload after 4 seconds in coursor stop
 au CursorHold,CursorHoldI * checktime
