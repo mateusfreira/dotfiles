@@ -13,7 +13,7 @@ fi
 if [ -f /Users/user/Downloads/google-cloud-sdk/completion.bash.inc ]; then
   source '/Users/user/Downloads/google-cloud-sdk/completion.bash.inc'
 fi
-export GOOGLE_APPLICATION_CREDENTIALS=/Users/user/git/callinize/tenfold-backend-services.json
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/mateus/git/tenfold/tenfold-backend-services.json
 source ~/git-completion.bash
 GIT_PS1_SHOWDIRTYSTATE=true
 #export PS1='[\u@mbp \w$(__git_ps1)]\$ '
