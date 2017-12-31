@@ -2,6 +2,7 @@ set history=100         " keep 100 lines of history
 set ruler               " show the cursor position
 syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
+set incsearch
 filetype plugin on      " use the file type plugins
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 " :calil pathogen#infect()
@@ -38,10 +39,13 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
-" Plugin 'pangloss/vim-javascript'
+"Plugin 'pangloss/vim-javascript'
+Plugin 'editorconfig/editorconfig-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+set smarttab
+set cindent
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -64,6 +68,7 @@ map <c-o> :NERDTree<cr>
 nmap <leader>t :call RunNearestTest()<cr>
 nmap <leader>y :call RunTestFile()<cr>
 nmap <leader>r :w<CR>:!node  %<cr>
+nmap <leader>w :w<CR>
 set laststatus=2
 let g:lightline = {
       \ 'active': {
@@ -148,7 +153,7 @@ function! GetNearestTest()
       " if closer test is found, cache new nearest test
       if(currentDiff <= lineDiff)
         let lineDiff = currentDiff
-        let s:nearestTest = substitute(matchlist(line,descPattern)[2],'\v([''"()])','(.{1})','g')
+        let g:nearestTest = substitute(matchlist(line,descPattern)[2],'\v([''"()])','(.{1})','g')
       endif
     endif
   endfor
@@ -160,11 +165,12 @@ function! RunNearestTest(...)
 	if in_test_file
 		call SetTestFile()
    		call GetNearestTest()
-	elseif !exists("g:grb_test_file")
+	elseif !exists("g:grb_test_file") 
   		return
+	elseif !exists("g:nearestTest") 
+		return
 	end
-	echom s:nearestTest
-	call RunTests(g:grb_test_file, " -g '".s:nearestTest."'")
+	call RunTests(g:grb_test_file, " -g '".g:nearestTest."'")
 endfunction
 " auto reload after 4 seconds in coursor stop
 au CursorHold,CursorHoldI * checktime
@@ -172,3 +178,18 @@ au CursorHold,CursorHoldI * checktime
 
 set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
+"Sniped plugin
+"
+"
+"
+" Track the engine.
+ Plugin 'SirVer/ultisnips'
+ " Snippets are separated from the engine. Add this if you want them:
+ Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab>
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" set dark background and color scheme
+let NERDTreeMapOpenInTab='<ENTER>'
+"set background=dark

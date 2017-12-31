@@ -60,6 +60,8 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  osx
+  tmux
 #  node
 )
 
@@ -107,3 +109,13 @@ alias gca='git commit -am'
 alias gc='git commit -m'
 alias gco='git checkout'
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mateus/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/mateus/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mateus/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/mateus/google-cloud-sdk/completion.zsh.inc'; fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
