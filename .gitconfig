@@ -5,3 +5,5 @@
 	email = mateus.freira@gmail.com
 [core]
 	excludesfile = ~/.global_gitignore
+[credential]
+	helper = cache
