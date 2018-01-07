@@ -19,3 +19,5 @@ pip install --user powerline-status
 brew install wget
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+brew install the_silver_searcher
+
