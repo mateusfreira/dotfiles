@@ -113,7 +113,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 function! RunTests(filename, complement)
   :w
   :silent !clear
-   exec ":!NODE_ENV=codeship mocha ".a:filename." ".a:complement
+   exec ":!NODE_ENV=codeship ./node_modules/.bin/mocha ".a:filename." ".a:complement
 endfunction
 " Thanks https://github.com/chrishunt
 function! SetTestFile()
