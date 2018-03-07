@@ -25,7 +25,7 @@ function store(time) {
 function print(time) {
     if (time != null) {
        const dots = time.description.length > 10 ? '...' : '';
-       console.log(`Toggl: ${time.description.substr(0, 10)}${dots} ⌚  ${moment.utc(moment(new Date()).diff(time.start)).format("HH:mm")}`);
+       console.log(`Toggl: ${time.description.substr(0, 10)}${dots}  ${moment.utc(moment(new Date()).diff(time.start)).format("HH:mm")}`);
     } else {
         process.stdout.write("No toggl task");
     }

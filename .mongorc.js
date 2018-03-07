@@ -5,11 +5,14 @@ var oldFind = DBCollection.prototype.find;
 DBCollection.prototype.find = function(query, fields, limit, skip, batchSize, options) {
     var isOrganization = this.toString().match(/organizations/);
     var isCall = this.toString().match(/calls/);
-    if ((!query._organization && !query._id) && !isOrganization && isCall) {
+    var isByID = query instanceof ObjectId;
+    if ((!query._organization && !query._id) && !isOrganization && isCall && !isByID) {
         throw "Add _organization or _id to your query";
     }
-    if (!query.createdDate && isCall) {
-        throw "Add a createdDate to this query :)";
+    if (!query.createdDate && isCall && !isByID) {
+        const date = new ISODate();
+        date.setHours(0);
+        throw `Add a createdDate to this query :) what about :  { createdDate: {  \$gt: ISODate('${date.toISOString()}') }    }`;
     }
     return oldFind.call(this, query, fields, limit, skip, batchSize, options);
 };

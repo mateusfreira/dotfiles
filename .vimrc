@@ -1,3 +1,4 @@
+let mapleader = ","
 set history=100         " keep 100 lines of history
 set ruler               " show the cursor position
 syntax on               " syntax highlighting
@@ -6,12 +7,11 @@ set incsearch
 filetype plugin on      " use the file type plugins
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 " :calil pathogen#infect()
-set number
-"noremap <Up> <Nop>
+
 "noremap <Down> <Nop>
 "noremap <Left> <Nop>
 "noremap <Right> <Nop>
-nmap <leader>l :set list!<CR>
+noremap <leader>l :set list!<CR>
 set listchars=eol:¬,trail:·,tab:»·
 set list
 set nocompatible              " be iMproved, required
@@ -29,18 +29,18 @@ Plugin 'mhinz/vim-signify'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'itchyny/lightline.vim'
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'lervag/vimtex'
 Plugin 'wakatime/vim-wakatime'
-Plugin 'fweep/vim-tabber'
-Plugin 'edkolev/tmuxline.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rking/ag.vim'
-"Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
+Plugin 'JKirchartz/writegooder.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'donRaphaco/neotex', { 'for': 'tex' } 
+Plugin 'dennougorilla/azuki.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -59,15 +59,21 @@ set cindent
 " Put your non-Plugin stuff after this linekkk
 "map <leader>fl :call RangeJsBeautify()<cr>
 "map <c-f> :call JsBeautify()<cr>
+:inoremap <F5> <C-R>=strftime("%c")<CR>
+:nnoremap <F5> "=strftime("%c")<CR>P
+"nnoremap <Leader>c oconsole.log();<Esc>hi
+nnoremap <Leader>c viWyoconsole.log();<Esc>hhp0f(lv$hhh
+nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
+map <F5> :
 map <c-f> :call RangeJsBeautify()<cr>
-let mapleader = ","
 map <leader>f :call JsBeautify()<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
-map <c-o> :NERDTree<cr>
+map <c-o> :NERDTreeToggle<cr>
 "nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
 nmap <leader>t :call RunNearestTest()<cr>
 nmap <leader>y :call RunTestFile()<cr>
-nmap <leader>r :w<CR>:!node  %<cr>
+nmap <leader>r :w<CR>:!node  % --run<cr>
+"Shows the console :)
 nmap <leader>w :w<CR>
 set laststatus=2
 let g:lightline = {
@@ -92,12 +98,6 @@ let g:ctrlp_prompt_mappings = {
 let g:ctrlp_clear_cache_on_exit = 0
 
 set guioptions-=e
-set tabline=%!tabber#TabLine()
-let g:tabber_wrap_when_shifting = 1
-let g:tabber_wrap_when_shifting = 1
-if !has('gui_running')
-  set t_Co=256
-endif
 set backspace=indent,eol,start
 "Ser current directory to create file
 set autochdir
@@ -191,5 +191,14 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " set dark background and color scheme
-let NERDTreeMapOpenInTab='<ENTER>'
+"let NERDTreeMapOpenInTab='<ENTER>'
 "set background=dark
+set rtp+=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/
+set laststatus=2
+set t_Co=256
+set number
+
+
+"au BufReadPost,BufNewFile *.md,*.txt,*.tex WritegooderEnable
+
+colorscheme azuki
