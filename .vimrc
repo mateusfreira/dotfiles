@@ -5,12 +5,13 @@ syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
 set incsearch
 filetype plugin on      " use the file type plugins
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
 " :calil pathogen#infect()
 
 "noremap <Down> <Nop>
 "noremap <Left> <Nop>
 "noremap <Right> <Nop>
+
 noremap <leader>l :set list!<CR>
 set listchars=eol:¬,trail:·,tab:»·
 set list
@@ -34,13 +35,27 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'lervag/vimtex'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'rking/ag.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'rking/ag.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'JKirchartz/writegooder.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'donRaphaco/neotex', { 'for': 'tex' } 
 Plugin 'dennougorilla/azuki.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+set rtp+=/usr/local/opt/fzf
+
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-g>g :Ag<CR>
+nnoremap <C-g>c :Commands<CR>
+nnoremap <C-f>l :BLines<CR>
+nnoremap <C-p> :GFiles<CR>﻿
+ 
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -70,9 +85,10 @@ map <leader>f :call JsBeautify()<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <c-o> :NERDTreeToggle<cr>
 "nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
+nmap <leader>q :on<cr>
 nmap <leader>t :call RunNearestTest()<cr>
 nmap <leader>y :call RunTestFile()<cr>
-nmap <leader>r :w<CR>:!node  % --run<cr>
+nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node  % --run<cr>
 "Shows the console :)
 nmap <leader>w :w<CR>
 set laststatus=2
@@ -100,7 +116,8 @@ let g:ctrlp_clear_cache_on_exit = 0
 set guioptions-=e
 set backspace=indent,eol,start
 "Ser current directory to create file
-set autochdir
+"set autochdir
+
 "Desable the search hl on the insert mode
 "let didit = 0
 "autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
@@ -201,4 +218,5 @@ set number
 
 "au BufReadPost,BufNewFile *.md,*.txt,*.tex WritegooderEnable
 
-colorscheme azuki
+colorscheme gruvbox
+set background=dark

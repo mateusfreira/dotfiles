@@ -144,3 +144,5 @@ load-nvmrc
 export PATH=$PATH:/Users/mateus/Library/Python/2.7/bin/:$HOME/.cargo/bin
 export EDITOR='vim'
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
