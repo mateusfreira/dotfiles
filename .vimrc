@@ -1,10 +1,11 @@
 let mapleader = ","
 set history=100         " keep 100 lines of history
 set ruler               " show the cursor position
+set relativenumber                " show relative line numbers
+set showmatch                     " show bracket matches
 syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
 set incsearch
-filetype plugin on      " use the file type plugins
 "set runtimepath^=~/.vim/bundle/ctrlp.vim
 " :calil pathogen#infect()
 
@@ -16,7 +17,6 @@ noremap <leader>l :set list!<CR>
 set listchars=eol:¬,trail:·,tab:»·
 set list
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -25,14 +25,27 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
+Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'carlitux/deoplete-ternjs'
+let g:deoplete#enable_at_startup = 1
+
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-surround'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'mhinz/vim-signify'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-repeat'
 Plugin 'itchyny/vim-gitbranch'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 Plugin 'lervag/vimtex'
+let g:tex_flavor='latex' " Avoid plaintex filetype for .tex files
 Plugin 'wakatime/vim-wakatime'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'ctrlpvim/ctrlp.vim'
@@ -40,7 +53,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'JKirchartz/writegooder.vim'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'donRaphaco/neotex', { 'for': 'tex' } 
+"Plugin 'donRaphaco/neotex', { 'for': 'tex' } 
 Plugin 'dennougorilla/azuki.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'elixir-editors/vim-elixir'
@@ -48,16 +61,38 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 set rtp+=/usr/local/opt/fzf
 
+"Plugin 'vim-syntastic/syntastic'
+"" Drop Syntastic settings at the end of the config file "
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers = ['eslint']
+""let g:syntastic_javascript_eslint_exe = 'eslint . --'
+"
+"let g:syntastic_mode_map={'mode': 'passive'}
+
+Plugin 'w0rp/ale'
+"let b:ale_linters = {'javascript': ['eslint']}
+
+
+nnoremap <leader>d :ALEToggle<CR>
+nnoremap ; :
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g>g :Ag<CR>
 nnoremap <C-g>c :Commands<CR>
 nnoremap <C-f>l :BLines<CR>
 nnoremap <C-p> :GFiles<CR>﻿
+nnoremap <C-t> :Tags<CR>﻿
  
 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+filetype off                  " required
 filetype plugin indent on    " required
 set smarttab
 set cindent
@@ -78,17 +113,23 @@ set cindent
 :nnoremap <F5> "=strftime("%c")<CR>P
 "nnoremap <Leader>c oconsole.log();<Esc>hi
 nnoremap <Leader>c viWyoconsole.log();<Esc>hhp0f(lv$hhh
-nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
+autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
+autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 map <F5> :
 map <c-f> :call RangeJsBeautify()<cr>
 map <leader>f :call JsBeautify()<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
-map <c-o> :NERDTreeToggle<cr>
+"map <c-o> :NERDTreeToggle<cr>
+map <leader>o :NERDTreeToggle<cr>
+
 "nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
 nmap <leader>q :on<cr>
 nmap <leader>t :call RunNearestTest()<cr>
 nmap <leader>y :call RunTestFile()<cr>
-nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node  % --run<cr>
+autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run<cr>
+autocmd FileType javascript nmap <leader>e :w<CR>:!eslint % --fix<cr>
+autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run<cr>
+nmap <leader>v :!pwd<cr>
 "Shows the console :)
 nmap <leader>w :w<CR>
 set laststatus=2
@@ -130,7 +171,8 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 function! RunTests(filename, complement)
   :w
   :silent !clear
-   exec ":!NODE_ENV=codeship mocha ".a:filename." ".a:complement
+ exec ":!NODE_ENV=codeship TENFOLD_DIFF_CALL_ARRAYS=true node --inspect ./node_modules/mocha/bin/mocha ".a:filename." ".a:complement
+"exec ":!echo ".a:filename." ".a:complement
 endfunction
 " Thanks https://github.com/chrishunt
 function! SetTestFile()
@@ -204,9 +246,9 @@ nnoremap <leader>. :CtrlPTag<cr>
  " Snippets are separated from the engine. Add this if you want them:
  Plugin 'honza/vim-snippets'
 " Trigger configuration. Do not use <tab>
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " set dark background and color scheme
 "let NERDTreeMapOpenInTab='<ENTER>'
 "set background=dark
@@ -220,3 +262,12 @@ set number
 
 colorscheme gruvbox
 set background=dark
+autocmd FileType gitcommit setlocal spell
+
+
+
+
+
+
+
+
