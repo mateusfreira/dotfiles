@@ -1,17 +1,20 @@
 let mapleader = ","
-set history=100         " keep 100 lines of history
+set history=200         " keep 100 lines of history
 set ruler               " show the cursor position
+set number                     " Show current line number
 set relativenumber                " show relative line numbers
 set showmatch                     " show bracket matches
 syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
 set incsearch
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
-" :calil pathogen#infect()
+set t_Co=256
+autocmd FileType gitcommit setlocal spell
 
-"noremap <Down> <Nop>
-"noremap <Left> <Nop>
-"noremap <Right> <Nop>
+
+" Unmap the arroul keys in nomal mode
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 noremap <leader>l :set list!<CR>
 set listchars=eol:¬,trail:·,tab:»·
@@ -21,74 +24,76 @@ set nocompatible              " be iMproved, required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'VundleVim/Vundle.vim'
+
+"Status bar
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_section_y = ''
+let g:airline_section_b = ''
+let g:airline_theme = 'sol'
+
+" Code completion
 Plugin 'Shougo/deoplete.nvim'
+" Required for  deoplete
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'carlitux/deoplete-ternjs'
 let g:deoplete#enable_at_startup = 1
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'terryma/vim-multiple-cursors'
+" Vim enhancements
 Plugin 'tpope/vim-surround'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mhinz/vim-signify'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-repeat'
-Plugin 'itchyny/vim-gitbranch'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plugin 'scrooloose/nerdtree'
+
+" Snipets
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" Javascript
+Plugin 'leafgarland/typescript-vim'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'pangloss/vim-javascript'
+Plugin 'editorconfig/editorconfig-vim'
+
+
+" Git util
+Plugin 'mhinz/vim-signify'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+"
+" Latex
 Plugin 'lervag/vimtex'
 let g:tex_flavor='latex' " Avoid plaintex filetype for .tex files
+
+" Trakers
 Plugin 'wakatime/vim-wakatime'
-Plugin 'scrooloose/nerdtree'
-"Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'rking/ag.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'JKirchartz/writegooder.vim'
-Plugin 'editorconfig/editorconfig-vim'
-"Plugin 'donRaphaco/neotex', { 'for': 'tex' } 
+
 Plugin 'dennougorilla/azuki.vim'
 Plugin 'morhetz/gruvbox'
+
+" Elixir
 Plugin 'elixir-editors/vim-elixir'
+
+"Fuzzy search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 set rtp+=/usr/local/opt/fzf
-
-"Plugin 'vim-syntastic/syntastic'
-"" Drop Syntastic settings at the end of the config file "
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers = ['eslint']
-""let g:syntastic_javascript_eslint_exe = 'eslint . --'
-"
-"let g:syntastic_mode_map={'mode': 'passive'}
-
-Plugin 'w0rp/ale'
-"let b:ale_linters = {'javascript': ['eslint']}
-
-
-nnoremap <leader>d :ALEToggle<CR>
-nnoremap ; :
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g>g :Ag<CR>
 nnoremap <C-g>c :Commands<CR>
 nnoremap <C-f>l :BLines<CR>
-nnoremap <C-p> :GFiles<CR>﻿
-nnoremap <C-t> :Tags<CR>﻿
- 
+nnoremap <C-p> :GFiles<CR>
+nnoremap <C-t> :Tags<CR>
+map <leader>s :Ag!<space>
 
+"Code style checking
+Plugin 'w0rp/ale'
+let g:ale_linters = {'javascript': ['eslint']}
+nnoremap <leader>d :ALEToggle<CR>
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -96,82 +101,43 @@ filetype off                  " required
 filetype plugin indent on    " required
 set smarttab
 set cindent
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this linekkk
-"map <leader>fl :call RangeJsBeautify()<cr>
-"map <c-f> :call JsBeautify()<cr>
-:inoremap <F5> <C-R>=strftime("%c")<CR>
-:nnoremap <F5> "=strftime("%c")<CR>P
-"nnoremap <Leader>c oconsole.log();<Esc>hi
-nnoremap <Leader>c viWyoconsole.log();<Esc>hhp0f(lv$hhh
-autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
-autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
-map <F5> :
+
+"Hot keys
+nnoremap ; :
 map <c-f> :call RangeJsBeautify()<cr>
 map <leader>f :call JsBeautify()<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
-"map <c-o> :NERDTreeToggle<cr>
 map <leader>o :NERDTreeToggle<cr>
 
-"nmap <leader>t :w<CR>:!NODE_ENV=codeship mocha %<cr>
+:inoremap <F5> <C-R>=strftime("%c")<CR>
+:nnoremap <F5> "=strftime("%c")<CR>P
+
 nmap <leader>q :on<cr>
 nmap <leader>t :call RunNearestTest()<cr>
 nmap <leader>y :call RunTestFile()<cr>
-autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run<cr>
 autocmd FileType javascript nmap <leader>e :w<CR>:!eslint % --fix<cr>
+"Run current file
+autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run<cr>
 autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run<cr>
-nmap <leader>v :!pwd<cr>
+autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 "Shows the console :)
+nmap <leader>v :!pwd<cr> 
+
+" In code maps
+autocmd FileType javascript nnoremap <Leader>c viWyoconsole.log();<Esc>hhp0f(lv$hhh
+autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
+autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
+"Save current file
 nmap <leader>w :w<CR>
-set laststatus=2
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
-      \ },
-      \ }
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,node_modules     " MacOSX/Linux
-set statusline+=%F
 
-
-
-" ctrp-p
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
-    \ 'AcceptSelection("t")': ['<cr>'],
-    \ }
-let g:ctrlp_clear_cache_on_exit = 0
-
-set guioptions-=e
 set backspace=indent,eol,start
 "Ser current directory to create file
-"set autochdir
 
-"Desable the search hl on the insert mode
-"let didit = 0
-"autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
-"autocmd! InsertLeave * let didit = 0
 
-" Silver search
-let g:ag_working_path_mode="r"
-map <leader>s :Ag!<space>
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 function! RunTests(filename, complement)
   :w
   :silent !clear
- exec ":!NODE_ENV=codeship TENFOLD_DIFF_CALL_ARRAYS=true node --inspect ./node_modules/mocha/bin/mocha ".a:filename." ".a:complement
+ exec ":!NODE_ENV=codeship TENFOLD_DIFF_CALL_ARRAYS=true LOG_IN_TEST=true PRINT_EVENTS=true node ./node_modules/mocha/bin/mocha ".a:filename." ".a:complement
 "exec ":!echo ".a:filename." ".a:complement
 endfunction
 " Thanks https://github.com/chrishunt
@@ -237,37 +203,8 @@ au CursorHold,CursorHoldI * checktime
 
 set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
-"Sniped plugin
-"
-"
-"
-" Track the engine.
- Plugin 'SirVer/ultisnips'
- " Snippets are separated from the engine. Add this if you want them:
- Plugin 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab>
-"let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" set dark background and color scheme
-"let NERDTreeMapOpenInTab='<ENTER>'
-"set background=dark
-set rtp+=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/
-set laststatus=2
-set t_Co=256
-set number
 
-
-"au BufReadPost,BufNewFile *.md,*.txt,*.tex WritegooderEnable
 
 colorscheme gruvbox
+"colorscheme darkblue
 set background=dark
-autocmd FileType gitcommit setlocal spell
-
-
-
-
-
-
-
-
