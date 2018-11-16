@@ -1,4 +1,5 @@
-let mapleader = ","
+"let mapleader = ","
+let mapleader = "\<Space>"
 set history=200         " keep 100 lines of history
 set ruler               " show the cursor position
 set number                     " Show current line number
@@ -8,8 +9,11 @@ syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
 set incsearch
 set t_Co=256
-autocmd FileType gitcommit setlocal spell
+set background=dark
+set colorcolumn=+1
+set textwidth=120
 
+autocmd FileType gitcommit setlocal spell
 
 " Unmap the arroul keys in nomal mode
 noremap <Down> <Nop>
@@ -72,8 +76,9 @@ let g:tex_flavor='latex' " Avoid plaintex filetype for .tex files
 " Trakers
 Plugin 'wakatime/vim-wakatime'
 
-Plugin 'dennougorilla/azuki.vim'
+" Themes
 Plugin 'morhetz/gruvbox'
+Plugin 'dracula/vim'
 
 " Elixir
 Plugin 'elixir-editors/vim-elixir'
@@ -83,18 +88,21 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
+nmap <leader>; :Buffers<CR>
 nnoremap <C-g>g :Ag<CR>
 nnoremap <C-g>c :Commands<CR>
 nnoremap <C-f>l :BLines<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-t> :Tags<CR>
 map <leader>s :Ag!<space>
+nnoremap <leader><leader> <c-^>
 
 "Code style checking
 Plugin 'w0rp/ale'
 let g:ale_linters = {'javascript': ['eslint']}
 nnoremap <leader>d :ALEToggle<CR>
 
+Plugin 'dennougorilla/azuki.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype off                  " required
@@ -105,7 +113,8 @@ set cindent
 "Hot keys
 nnoremap ; :
 map <c-f> :call RangeJsBeautify()<cr>
-map <leader>f :call JsBeautify()<cr>
+autocmd FileType javascript map <leader>f :call JsBeautify()<cr>
+autocmd FileType go map <leader>f :!go fmt %<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <leader>o :NERDTreeToggle<cr>
 
@@ -115,13 +124,13 @@ map <leader>o :NERDTreeToggle<cr>
 nmap <leader>q :on<cr>
 nmap <leader>t :call RunNearestTest()<cr>
 nmap <leader>y :call RunTestFile()<cr>
-autocmd FileType javascript nmap <leader>e :w<CR>:!eslint % --fix<cr>
+autocmd FileType javascript nmap <leader>e :w<CR>:!eslint % --fix <cr>
 "Run current file
-autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run<cr>
-autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run<cr>
+autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run <cr>
+autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 "Shows the console :)
-nmap <leader>v :!pwd<cr> 
+nmap <leader>v :!pwd <cr>
 
 " In code maps
 autocmd FileType javascript nnoremap <Leader>c viWyoconsole.log();<Esc>hhp0f(lv$hhh
@@ -205,6 +214,7 @@ set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
 
 
+
 colorscheme gruvbox
+"colorscheme dracula
 "colorscheme darkblue
-set background=dark

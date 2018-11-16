@@ -4,10 +4,18 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/mateus/.oh-my-zsh
 
+export NVM_DIR="/Users/user/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export GEM_HOME=$HOME/.gem
+export GEM_PATH=$HOME/.gem
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+#ZSH_THEME="af-magic"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -97,10 +105,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="/Users/mateus/.rvm/gems/ruby-2.4.1/bin:/Users/mateus/.rvm/gems/ruby-2.4.1@global/bin:/Users/mateus/.rvm/rubies/ruby-2.4.1/bin:/Users/mateus/.nvm/versions/node/v8.11.2/bin:/Users/mateus/google-cloud-sdk/bin:/Users/mateus/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/go/bin:/opt/X11/bin:/Applications/Wireshark.app/Contents/MacOS:/Users/mateus/.rvm/gems/ruby-2.4.1/bin:/Users/mateus/.rvm/gems/ruby-2.4.1@global/bin:/Users/mateus/.rvm/rubies/ruby-2.4.1/bin:/Users/mateus/.rvm/bin:/Users/mateus/Library/Python/2.7/bin/:/Users/mateus/Library/Python/2.7/bin/:/Users/mateus/.cargo/bin"
 export PATH="$PATH:$HOME/.rvm/bin"
 
 
-source "/Users/mateus/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 source "/Users/mateus/tokens.sh" # Toggle and others
 alias gpb='git push origin `git rev-parse --abbrev-ref HEAD`'
 alias gst='git status'
@@ -141,7 +149,8 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
-export PATH=$PATH:/Users/mateus/Library/Python/2.7/bin/:$HOME/.cargo/bin
+#export PATH=$PATH:/Users/mateus/Library/Python/2.7/bin/:$HOME/.cargo/bin
+
 export EDITOR='vim'
 
 export LC_ALL=en_US.UTF-8
