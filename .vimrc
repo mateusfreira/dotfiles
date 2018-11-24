@@ -79,6 +79,7 @@ Plugin 'wakatime/vim-wakatime'
 " Themes
 Plugin 'morhetz/gruvbox'
 Plugin 'dracula/vim'
+Plugin 'altercation/vim-colors-solarized'
 
 " Elixir
 Plugin 'elixir-editors/vim-elixir'
@@ -216,5 +217,6 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 
 colorscheme gruvbox
+"colorscheme solarized
 "colorscheme dracula
 "colorscheme darkblue
