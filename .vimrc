@@ -12,6 +12,8 @@ set t_Co=256
 set background=dark
 set colorcolumn=+1
 set textwidth=120
+autocmd FileType tex set textwidth=0
+set wrapmargin=0
 
 autocmd FileType gitcommit setlocal spell
 
@@ -40,7 +42,10 @@ let g:airline_section_b = ''
 let g:airline_theme = 'sol'
 
 " Code completion
-Plugin 'Shougo/deoplete.nvim'
+"Plugin 'Shougo/deoplete.nvim'
+"let g:deoplete#auto_complete_delay = 50
+"let g:deoplete#num_processes = 8
+
 " Required for  deoplete
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
@@ -51,6 +56,9 @@ let g:deoplete#enable_at_startup = 1
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'scrooloose/nerdtree'
+" Let nerdtree like textmake
+let g:NERDTreeWinPos = "right" 
+
 
 " Snipets
 Plugin 'SirVer/ultisnips'
@@ -83,6 +91,9 @@ Plugin 'altercation/vim-colors-solarized'
 
 " Elixir
 Plugin 'elixir-editors/vim-elixir'
+
+"Rust 
+Plugin 'rust-lang/rust.vim'
 
 "Fuzzy search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -130,6 +141,7 @@ autocmd FileType javascript nmap <leader>e :w<CR>:!eslint % --fix <cr>
 autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run <cr>
 autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
+autocmd FileType rust nmap <leader>r :w<CR>:!cargo run<cr>
 "Shows the console :)
 nmap <leader>v :!pwd <cr>
 
