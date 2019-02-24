@@ -4,8 +4,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/mateus/.oh-my-zsh
 
-export NVM_DIR="/Users/user/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export GEM_HOME=$HOME/.gem
@@ -15,7 +15,9 @@ export GEM_PATH=$HOME/.gem
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="af-magic"
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="avit"
+
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -155,3 +157,11 @@ export EDITOR='vim'
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+# If command execution time above min. time, plugins will not output time.
+ZSH_COMMAND_TIME_MIN_SECONDS=3
+
+# Message to display (set to "" for disable).
+ZSH_COMMAND_TIME_MSG="Execution time: %s sec"
+
+# Message color.
+ZSH_COMMAND_TIME_COLOR="cyan"

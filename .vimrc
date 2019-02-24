@@ -3,7 +3,7 @@ let mapleader = "\<Space>"
 set history=200         " keep 100 lines of history
 set ruler               " show the cursor position
 set number                     " Show current line number
-set relativenumber                " show relative line numbers
+"set relativenumber                " show relative line numbers
 set showmatch                     " show bracket matches
 syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
@@ -92,6 +92,11 @@ Plugin 'altercation/vim-colors-solarized'
 " Elixir
 Plugin 'elixir-editors/vim-elixir'
 
+" Elm
+Plugin 'elmcast/elm-vim'
+let g:elm_format_autosave = 1
+
+
 "Rust 
 Plugin 'rust-lang/rust.vim'
 
@@ -126,6 +131,7 @@ set cindent
 nnoremap ; :
 map <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType javascript map <leader>f :call JsBeautify()<cr>
+autocmd FileType typescript map <leader>f :w<CR>:!tsfmt -r %<cr>
 autocmd FileType go map <leader>f :!go fmt %<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <leader>o :NERDTreeToggle<cr>
@@ -159,8 +165,12 @@ set backspace=indent,eol,start
 function! RunTests(filename, complement)
   :w
   :silent !clear
- exec ":!NODE_ENV=codeship TENFOLD_DIFF_CALL_ARRAYS=true LOG_IN_TEST=true PRINT_EVENTS=true node ./node_modules/mocha/bin/mocha ".a:filename." ".a:complement
-"exec ":!echo ".a:filename." ".a:complement
+  let in_ts_file = match(a:filename, '\(.ts\)$') != -1
+  if(in_ts_file)
+    exec ":!jest --config ./jest.server.config.js ".a:filename." -t ".a:complement
+  else
+    exec ":!NODE_ENV=codeship node ./node_modules/mocha/bin/mocha ".a:filename." -g ".a:complement
+  endif
 endfunction
 " Thanks https://github.com/chrishunt
 function! SetTestFile()
@@ -171,12 +181,13 @@ endfunction
 
 function! RunTestFile(...)
 	" run the tests for the previously-marked file.
-	let in_test_file = match(expand("%"), '\(spec.js\|test.js\)$') != -1
+	let in_test_file = match(expand("%"), '\(spec.*\|test.*\)$') != -1
 	if in_test_file
 	   call SetTestFile()
 	elseif !exists("g:grb_test_file")
   		return
 	end
+
 	call RunTests(g:grb_test_file, "")
 endfunction
 
@@ -208,7 +219,7 @@ endfunction
 
 function! RunNearestTest(...)
 	" run the tests for the previously-marked file.
-	let in_test_file = match(expand("%"), '\(spec.js\|test.js\)$') != -1
+	let in_test_file = match(expand("%"), '\(spec.*\|test.*\)$') != -1
 	if in_test_file
 		call SetTestFile()
    		call GetNearestTest()
@@ -217,7 +228,7 @@ function! RunNearestTest(...)
 	elseif !exists("g:nearestTest") 
 		return
 	end
-	call RunTests(g:grb_test_file, " -g '".g:nearestTest."'")
+	call RunTests(g:grb_test_file, " '".g:nearestTest."'")
 endfunction
 " auto reload after 4 seconds in coursor stop
 au CursorHold,CursorHoldI * checktime
