@@ -100,6 +100,11 @@ let g:elm_format_autosave = 1
 "Rust 
 Plugin 'rust-lang/rust.vim'
 
+"Typescript
+Plugin 'heavenshell/vim-jsdoc'
+"Plugin 'Quramy/tsuquyomi'
+
+
 "Fuzzy search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
@@ -116,7 +121,9 @@ nnoremap <leader><leader> <c-^>
 
 "Code style checking
 Plugin 'w0rp/ale'
-let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['tslint', 'tsserver']}
+"let g:ale_linters_ignore = {'typescript': ['tslint']}
+
 nnoremap <leader>d :ALEToggle<CR>
 
 Plugin 'dennougorilla/azuki.vim'
@@ -142,7 +149,8 @@ map <leader>o :NERDTreeToggle<cr>
 nmap <leader>q :on<cr>
 nmap <leader>t :call RunNearestTest()<cr>
 nmap <leader>y :call RunTestFile()<cr>
-autocmd FileType javascript nmap <leader>e :w<CR>:!eslint % --fix <cr>
+autocmd FileType javascript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
+autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p tsconfig.json % <cr>
 "Run current file
 autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run <cr>
 autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run <cr>
