@@ -155,7 +155,8 @@ autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p t
 autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run <cr>
 autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
-autocmd FileType rust nmap <leader>r :w<CR>:!cargo run<cr>
+autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
+
 "Shows the console :)
 nmap <leader>v :!pwd <cr>
 
@@ -165,6 +166,7 @@ autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
 autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 "Save current file
 nmap <leader>w :w<CR>
+nmap <leader>e :!tmux new -d "livedown start % --port 4242"&&echo "Started livedown in the backgound 4242"<CR>
 
 set backspace=indent,eol,start
 "Ser current directory to create file
