@@ -11,7 +11,7 @@ set incsearch
 set t_Co=256
 set background=dark
 set colorcolumn=+1
-set textwidth=120
+set textwidth=100
 autocmd FileType tex set textwidth=0
 set wrapmargin=0
 
@@ -71,8 +71,12 @@ Plugin 'maksimr/vim-jsbeautify'
 Plugin 'pangloss/vim-javascript'
 Plugin 'editorconfig/editorconfig-vim'
 
+"Jenkins
+au BufNewFile,BufRead jenkinsfile setf groovy 
+Plugin 'sheerun/vim-polyglot'
 
-" Git util
+
+"Git util
 Plugin 'mhinz/vim-signify'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -127,6 +131,10 @@ let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['tslint', 'tsserve
 nnoremap <leader>d :ALEToggle<CR>
 
 Plugin 'dennougorilla/azuki.vim'
+
+" Org mode
+Plugin 'jceb/vim-orgmode'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype off                  " required
@@ -147,10 +155,14 @@ map <leader>o :NERDTreeToggle<cr>
 :nnoremap <F5> "=strftime("%c")<CR>P
 
 nmap <leader>q :on<cr>
-nmap <leader>t :call RunNearestTest()<cr>
+autocmd FileType javascript nmap <leader>t :call RunNearestTest()<cr>
+autocmd FileType rust nmap <leader>t :w<CR>:!cargo test<cr>
+
 nmap <leader>y :call RunTestFile()<cr>
 autocmd FileType javascript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
 autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p tsconfig.json % <cr>
+autocmd FileType rust nmap <leader>e :w<CR>:!cargo fmt <cr>
+
 "Run current file
 autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run <cr>
 autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run <cr>
@@ -249,7 +261,7 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 
 
-colorscheme gruvbox
+"colorscheme gruvbox
 "colorscheme solarized
-"colorscheme dracula
+colorscheme dracula
 "colorscheme darkblue

@@ -1,6 +1,6 @@
 #!/bin/bash
 SESSION="mfsolutions-realtime"
-cd ./developer-time-tracker 
+cd ./nun-db
 #OpenVim
 tmux -2 new-session -d -s $SESSION
 tmux send-keys "vim" C-m
