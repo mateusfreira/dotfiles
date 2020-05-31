@@ -3,7 +3,7 @@ let mapleader = "\<Space>"
 set history=200         " keep 100 lines of history
 set ruler               " show the cursor position
 set number                     " Show current line number
-"set relativenumber                " show relative line numbers
+set relativenumber                " show relative line numbers
 set showmatch                     " show bracket matches
 syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
@@ -17,6 +17,15 @@ set wrapmargin=0
 
 autocmd FileType gitcommit setlocal spell
 
+" Easier split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Copy to keyboard
+" @todo Need a better key map here
+xnoremap yy :w !pbcopy<CR><CR> 
 " Unmap the arroul keys in nomal mode
 noremap <Down> <Nop>
 noremap <Left> <Nop>
@@ -30,9 +39,16 @@ set nocompatible              " be iMproved, required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+" Use release branch (Recommend)
+" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+" Yank highlight 
+Plugin 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 500
 
 "Status bar
 Plugin 'vim-airline/vim-airline'
@@ -156,7 +172,7 @@ map <leader>o :NERDTreeToggle<cr>
 
 nmap <leader>q :on<cr>
 autocmd FileType javascript nmap <leader>t :call RunNearestTest()<cr>
-autocmd FileType rust nmap <leader>t :w<CR>:!cargo test<cr>
+autocmd FileType rust nmap <leader>t :w<CR>:!cargo test<CR>
 
 nmap <leader>y :call RunTestFile()<cr>
 autocmd FileType javascript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
@@ -164,7 +180,7 @@ autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p t
 autocmd FileType rust nmap <leader>e :w<CR>:!cargo fmt <cr>
 
 "Run current file
-autocmd FileType javascript nmap <leader>r :w<CR>:!TENFOLD_CONFIG_NAME=production node --inspect % --run <cr>
+autocmd FileType javascript nmap <leader>r :w<CR>:!node --inspect % --run <cr>
 autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
@@ -187,11 +203,16 @@ set backspace=indent,eol,start
 function! RunTests(filename, complement)
   :w
   :silent !clear
-  let in_ts_file = match(a:filename, '\(.ts\)$') != -1
-  if(in_ts_file)
-    exec ":!jest --config ./jest.server.config.js ".a:filename." -t ".a:complement
+  let in_testcafe_file = match(a:filename, '\(testcafe.*\)$') != -1
+  if(in_testcafe_file)
+    if(a:complement == "")
+        exec ":!./node_modules/.bin/testcafe 'chrome' ".a:filename
+"   exec ":!./node_modules/.bin/testcafe 'chrome:headless' ".a:filename
+   else 
+        exec ":!./node_modules/.bin/testcafe 'chrome' ".a:filename." -t ".a:complement
+    endif
   else
-    exec ":!NODE_ENV=codeship node ./node_modules/mocha/bin/mocha ".a:filename." -g ".a:complement
+    exec ":!./node_modules/.bin/jest ".a:filename." -t ".a:complement
   endif
 endfunction
 " Thanks https://github.com/chrishunt
@@ -203,7 +224,7 @@ endfunction
 
 function! RunTestFile(...)
 	" run the tests for the previously-marked file.
-	let in_test_file = match(expand("%"), '\(spec.*\|test.*\)$') != -1
+	let in_test_file = match(expand("%"), '\(testcafe.*\|spec.*\|test.*\)$') != -1
 	if in_test_file
 	   call SetTestFile()
 	elseif !exists("g:grb_test_file")
@@ -220,7 +241,7 @@ function! GetNearestTest()
   let file = readfile(expand("%:p"))  "read current file
   let lineCount = 0                   "file line counter
   let lineDiff = 999                  "arbituary large number
-  let descPattern = '\v<(it|describe|context)\s*\(?\s*[''"](.*)[''"]\s*,'
+  let descPattern = '\v<(it|describe|context|test)\s*\(?\s*[''"](.*)[''"]\s*,'
   for line in file
     let lineCount += 1
     let match = match(line,descPattern)
