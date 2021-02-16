@@ -12,6 +12,7 @@ set t_Co=256
 set background=dark
 set colorcolumn=+1
 set textwidth=100
+set formatoptions-=t " Stop bracking the lines at the limit
 autocmd FileType tex set textwidth=0
 set wrapmargin=0
 
@@ -36,15 +37,24 @@ set listchars=eol:¬,trail:·,tab:»·
 set list
 set nocompatible              " be iMproved, required
 
+" Dictionary complete
+inoremap <C-D> <C-X><C-K>
+autocmd FileType markdown set spell
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Use release branch (Recommend)
-" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+" To run rust  rustup component add rls rust-analysis rust-src
+" :CocInstall coc-rls
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plugin 'shime/vim-livedown'
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+" Test
+Plugin 'vim-test/vim-test'
 
 " Yank highlight 
 Plugin 'machakann/vim-highlightedyank'
@@ -58,15 +68,15 @@ let g:airline_section_b = ''
 let g:airline_theme = 'sol'
 
 " Code completion
-"Plugin 'Shougo/deoplete.nvim'
+" Plugin 'Shougo/deoplete.nvim'
 "let g:deoplete#auto_complete_delay = 50
 "let g:deoplete#num_processes = 8
 
 " Required for  deoplete
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'carlitux/deoplete-ternjs'
-let g:deoplete#enable_at_startup = 1
+" Plugin 'roxma/nvim-yarp'
+" Plugin 'roxma/vim-hug-neovim-rpc'
+" Plugin 'carlitux/deoplete-ternjs'
+" let g:deoplete#enable_at_startup = 1
 
 " Vim enhancements
 Plugin 'tpope/vim-surround'
@@ -128,6 +138,8 @@ Plugin 'heavenshell/vim-jsdoc'
 "Fuzzy search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+
+
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
 nmap <leader>; :Buffers<CR>
@@ -141,7 +153,13 @@ nnoremap <leader><leader> <c-^>
 
 "Code style checking
 Plugin 'w0rp/ale'
-let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['tslint', 'tsserver']}
+let g:ale_linters = {
+\   'javascript': ['eslint'], 'typescript': ['tslint', 'tsserver'],
+\   'markdown':      ['mdl', 'writegood'],
+\}
+let g:ale_fixers = {
+            \   '*':          ['remove_trailing_lines', 'trim_whitespace'],
+            \}
 "let g:ale_linters_ignore = {'typescript': ['tslint']}
 
 nnoremap <leader>d :ALEToggle<CR>
@@ -172,9 +190,17 @@ map <leader>o :NERDTreeToggle<cr>
 
 nmap <leader>q :on<cr>
 autocmd FileType javascript nmap <leader>t :call RunNearestTest()<cr>
-autocmd FileType rust nmap <leader>t :w<CR>:!cargo test<CR>
+autocmd FileType cucumber nmap <leader>t :w<CR>:!npm run bdd:ui:file -- %<CR>
+
+function! Wait()
+    sleep 200m
+endfunction
+
+autocmd FileType rust nmap <leader>t :TestNearest<CR>
 
 nmap <leader>y :call RunTestFile()<cr>
+autocmd FileType rust nmap <leader>y :TestFile<cr>
+
 autocmd FileType javascript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
 autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p tsconfig.json % <cr>
 autocmd FileType rust nmap <leader>e :w<CR>:!cargo fmt <cr>
@@ -282,7 +308,7 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 
 
-"colorscheme gruvbox
+colorscheme gruvbox
 "colorscheme solarized
-colorscheme dracula
+"colorscheme dracula
 "colorscheme darkblue
