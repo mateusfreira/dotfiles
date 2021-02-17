@@ -3,7 +3,7 @@ function fish_prompt --description 'Write out the prompt'
     if not set -q __fish_prompt_hostname
     set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
     end
-    set kubenv "#"(set_color red)(kubectl config current-context)
+    set kubenv "#"(set_color red)(echo "none-for-now")
 
     if not set -q __fish_prompt_normal
     set -g __fish_prompt_normal (set_color normal)
@@ -37,7 +37,6 @@ function fish_prompt --description 'Write out the prompt'
 
     end
 end
-source "/Users/mateus/tokens.sh" # Toggle and others
 alias gpb="git push origin (git rev-parse --abbrev-ref HEAD)"
 alias gst='git status'
 alias gbr='git branch'
@@ -45,3 +44,6 @@ alias gca='git commit -am'
 alias gc='git commit -m'
 alias gco='git checkout'
 set PATH $HOME/.cargo/bin $PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
