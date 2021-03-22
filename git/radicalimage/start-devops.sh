@@ -8,7 +8,7 @@ tmux send-keys "vim" C-m
 tmux new-window -t $SESSION:1 -n 'bash'
 tmux new-window -t $SESSION:2 -n 'kb8s proxy'
 tmux new-window -t $SESSION:3 -n 'notes'
-tmux send-keys "cd /Users/mateus/git/radicalimage/&&vim Notes-devops.md" C-m
+tmux send-keys "cd /Users/mateusfreira/git/radicalimage/nucleus/notes/&&./start-vim.sh" C-m
 
 tmux select-window -t $SESSION:0
 tmux -2 attach-session -t $SESSION

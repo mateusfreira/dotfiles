@@ -166,6 +166,8 @@ let g:ale_fixers = {
 "let g:ale_linters_ignore = {'typescript': ['tslint']}
 
 nnoremap <leader>d :ALEToggle<CR>
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
 
 Plugin 'dennougorilla/azuki.vim'
 
