@@ -142,6 +142,11 @@ Plugin 'heavenshell/vim-jsdoc'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
+"Sum bumbers
+Plugin 'emugel/vim-sum'
+nmap <Leader>a <Plug>VimSumOperatorPending
+vmap <Leader>a <Plug>VimSumVisual
+
 
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
@@ -211,8 +216,8 @@ autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p t
 autocmd FileType rust nmap <leader>e :w<CR>:!cargo fmt <cr>
 
 "Run current file
-autocmd FileType javascript nmap <leader>r :w<CR>:!node --inspect % --run <cr>
-autocmd FileType python nmap <leader>r :w<CR>:!python3  % --run <cr>
+autocmd FileType javascript nmap <leader>r :w<CR>:!node --inspect %  <cr>
+autocmd FileType python nmap <leader>r :w<CR>:!python3  % <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
 
@@ -226,6 +231,9 @@ autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 "Save current file
 nmap <leader>w :w<CR>
 nmap <leader>e :!tmux new -d "livedown start % --port 4242"&&echo "Started livedown in the backgound 4242"<CR>
+
+" GO to file in markdown
+noremap <leader>g yi[:edit <C-R>"<cr>
 
 set backspace=indent,eol,start
 "Ser current directory to create file
@@ -310,7 +318,6 @@ au CursorHold,CursorHoldI * checktime
 
 set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
-
 
 
 colorscheme gruvbox

@@ -46,4 +46,4 @@ alias gco='git checkout'
 set PATH $HOME/.cargo/bin $PATH
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
+if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk2/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk2/path.fish.inc'; end
