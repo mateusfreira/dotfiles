@@ -8,6 +8,8 @@ set showmatch                     " show bracket matches
 syntax on               " syntax highlighting
 " set hlsearch            " highlight the last searched term
 set incsearch
+set ignorecase
+set smartcase           "If captital search by case sensitive
 set t_Co=256
 set background=dark
 set colorcolumn=+1
@@ -142,10 +144,13 @@ Plugin 'heavenshell/vim-jsdoc'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
-"Sum bumbers
+"Sum numbers
 Plugin 'emugel/vim-sum'
 nmap <Leader>a <Plug>VimSumOperatorPending
 vmap <Leader>a <Plug>VimSumVisual
+
+" Markdown 
+Plugin 'junegunn/goyo.vim'
 
 
 set rtp+=/usr/local/opt/fzf
@@ -209,7 +214,7 @@ endfunction
 autocmd FileType rust nmap <leader>t :TestNearest<CR>
 
 nmap <leader>y :call RunTestFile()<cr>
-autocmd FileType rust nmap <leader>y :TestFile<cr>
+autocmd FileType rust nmap <leader>y :!cargo test<cr>
 
 autocmd FileType javascript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
 autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p tsconfig.json % <cr>
