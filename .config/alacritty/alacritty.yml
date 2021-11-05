@@ -71,22 +71,19 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    #family: Menlo
-    family: Roboto Mono for Powerline
+    family: Menlo
     # The `style` can be specified to pick a specific face.
     #style: Regular
 
   # Bold font face
   bold:
-      #family: Menlo
-    family: Roboto Mono for Powerline
+    family: Menlo
     # The `style` can be specified to pick a specific face.
     #style: Bold
 
   # Italic font face
   italic:
-      #family: Menlo
-    family: Roboto Mono for Powerline
+    family: Menlo
     # The `style` can be specified to pick a specific face.
     #style: Italic
 
@@ -241,12 +238,13 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: false
 
-  url:
+  #url:
+  #
     # URL launcher
     #
     # This program is executed when clicking on a text which is recognized as a URL.
     # The URL is always added to the command as the last parameter.
-    launcher: open
+    #jlauncher: open
 
     # URL modifiers
     #
