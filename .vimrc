@@ -46,12 +46,20 @@ autocmd FileType markdown set spell
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
 " :CocInstall coc-rls
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+nmap <leader>a :CocAction<CR>
+" Plugin 'neovim/nvim-lspconfig'
+" lua require'lspconfig'.rust_analyzer.setup({})
+
+" Plugin 'neovim/nvim-lspconfig'
+" Plugin 'nvim-lua/completion-nvim'
 
 Plugin 'shime/vim-livedown'
+Plugin 'vim-scripts/DrawIt'
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
