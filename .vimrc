@@ -170,7 +170,17 @@ let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-autocmd BufRead,BufNewFile *.md :Goyo 36
+autocmd BufNewFile *.md :Goyo 36
+autocmd BufEnter * call s:auto_goyo()
+function! s:auto_goyo()
+  if &ft == 'markdown'
+    Goyo 36
+  elseif exists('#goyo')
+    let bufnr = bufnr('%')
+    Goyo!
+    execute 'b '.bufnr
+  endif
+endfunction
 
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
