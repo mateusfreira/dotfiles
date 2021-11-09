@@ -1,4 +1,7 @@
 "let mapleader = ","
+"
+"The author suggests you add a 36 columns to your editor and you text will be
+"better. It dos sound better to write it like this.
 let mapleader = "\<Space>"
 set history=200         " keep 100 lines of history
 set ruler               " show the cursor position
@@ -15,7 +18,6 @@ set background=dark
 set colorcolumn=+1
 set textwidth=100
 set formatoptions-=t " Stop bracking the lines at the limit
-autocmd FileType tex set textwidth=0
 set wrapmargin=0
 
 autocmd FileType gitcommit setlocal spell
@@ -159,7 +161,16 @@ vmap <Leader>a <Plug>VimSumVisual
 
 " Markdown 
 Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+autocmd BufRead,BufNewFile *.md :Goyo 36
 
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
@@ -337,3 +348,5 @@ colorscheme gruvbox
 "colorscheme solarized
 "colorscheme dracula
 "colorscheme darkblue
+autocmd FileType tex set textwidth=0
+autocmd FileType markdown set textwidth=0
