@@ -38,7 +38,7 @@ function fish_prompt --description 'Write out the prompt'
 
     end
 end
-source "$HOME/tokens.sh" # Toggle and others
+# source "$HOME/tokens.sh" # Toggle and others
 alias gpb="git push origin (git rev-parse --abbrev-ref HEAD)"
 alias gst='git status'
 alias gbr='git branch'

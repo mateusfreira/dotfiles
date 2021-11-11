@@ -36,7 +36,6 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-noremap <leader>l :set list!<CR>
 set listchars=eol:¬,trail:·,tab:»·
 set list
 set nocompatible              " be iMproved, required
@@ -162,7 +161,7 @@ vmap <Leader>a <Plug>VimSumVisual
 " Markdown 
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
-
+noremap <leader>l :Goyo 36<CR>
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
@@ -170,17 +169,7 @@ let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-autocmd BufNewFile *.md :Goyo 36
-autocmd BufEnter * call s:auto_goyo()
-function! s:auto_goyo()
-  if &ft == 'markdown'
-    Goyo 36
-  elseif exists('#goyo')
-    let bufnr = bufnr('%')
-    Goyo!
-    execute 'b '.bufnr
-  endif
-endfunction
+autocmd BufNewFile _posts/*.md :Goyo 36
 
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
