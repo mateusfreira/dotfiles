@@ -1,7 +1,4 @@
 "let mapleader = ","
-"
-"The author suggests you add a 36 columns to your editor and you text will be
-"better. It dos sound better to write it like this.
 let mapleader = "\<Space>"
 set history=200         " keep 100 lines of history
 set ruler               " show the cursor position
