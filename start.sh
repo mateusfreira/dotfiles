@@ -15,3 +15,7 @@ sudo easy_install pip
 brew install wget
 brew install the_silver_searcher
 brew install fish
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+fisher install dracula/fish
+
+

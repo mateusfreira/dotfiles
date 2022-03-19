@@ -214,6 +214,7 @@ autocmd FileType typescript map <leader>f :w<CR>:!tsfmt -r %<cr>
 autocmd FileType go map <leader>f :!go fmt %<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <leader>o :NERDTreeToggle<cr>
+map <leader>p :NERDTreeFind<cr>
 
 :inoremap <F5> <C-R>=strftime("%c")<CR>
 :nnoremap <F5> "=strftime("%c")<CR>P
@@ -227,6 +228,7 @@ function! Wait()
 endfunction
 
 autocmd FileType rust nmap <leader>t :TestNearest<CR>
+autocmd FileType rust nmap <leader>l :TestLast<CR>
 
 nmap <leader>y :call RunTestFile()<cr>
 autocmd FileType rust nmap <leader>y :!cargo test<cr>
@@ -340,9 +342,9 @@ set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
 
 
-colorscheme gruvbox
+"colorscheme gruvbox
 "colorscheme solarized
-"colorscheme dracula
+colorscheme dracula
 "colorscheme darkblue
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
