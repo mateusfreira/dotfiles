@@ -44,6 +44,8 @@ autocmd FileType markdown set spell
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
+Plugin 'sedm0784/vim-you-autocorrect'
 Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
@@ -214,7 +216,7 @@ autocmd FileType typescript map <leader>f :w<CR>:!tsfmt -r %<cr>
 autocmd FileType go map <leader>f :!go fmt %<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <leader>o :NERDTreeToggle<cr>
-map <leader>p :NERDTreeFind<cr>
+map <leader>i :NERDTreeFind<cr>
 
 :inoremap <F5> <C-R>=strftime("%c")<CR>
 :nnoremap <F5> "=strftime("%c")<CR>P
@@ -252,7 +254,6 @@ autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
 autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 "Save current file
 nmap <leader>w :w<CR>
-nmap <leader>e :!tmux new -d "livedown start % --port 4242"&&echo "Started livedown in the backgound 4242"<CR>
 
 " GO to file in markdown
 noremap <leader>g yi[:edit <C-R>"<cr>
