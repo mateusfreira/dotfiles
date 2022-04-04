@@ -1,7 +1,4 @@
 "let mapleader = ","
-"
-"The author suggests you add a 36 columns to your editor and you text will be
-"better. It dos sound better to write it like this.
 let mapleader = "\<Space>"
 set history=200         " keep 100 lines of history
 set ruler               " show the cursor position
@@ -47,6 +44,8 @@ autocmd FileType markdown set spell
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
+Plugin 'sedm0784/vim-you-autocorrect'
 Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
@@ -231,6 +230,7 @@ function! Wait()
 endfunction
 
 autocmd FileType rust nmap <leader>t :TestNearest<CR>
+autocmd FileType rust nmap <leader>l :TestLast<CR>
 
 nmap <leader>y :call RunTestFile()<cr>
 autocmd FileType rust nmap <leader>y :!cargo test<cr>
@@ -254,7 +254,6 @@ autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
 autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 "Save current file
 nmap <leader>w :w<CR>
-nmap <leader>e :!tmux new -d "livedown start % --port 4242"&&echo "Started livedown in the backgound 4242"<CR>
 
 " GO to file in markdown
 noremap <leader>g yi[:edit <C-R>"<cr>
@@ -344,9 +343,9 @@ set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
 
 
-colorscheme gruvbox
+"colorscheme gruvbox
 "colorscheme solarized
-"colorscheme dracula
+colorscheme dracula
 "colorscheme darkblue
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
