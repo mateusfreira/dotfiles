@@ -39,3 +39,4 @@ alias gco='git checkout'
 export PATH="$HOME/.cargo/bin:$PATH"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 . "$HOME/.cargo/env"
+export PATH=/Users/mateusfreira/.meteor:$PATH

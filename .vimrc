@@ -36,7 +36,7 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-set listchars=eol:¬,trail:·,tab:»·
+" set listchars=eol:¬,trail:·,tab:»·
 set list
 set nocompatible              " be iMproved, required
 
@@ -51,7 +51,7 @@ Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
 " :CocInstall coc-rls
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 nmap <leader>a :CocAction<CR>
 " Plugin 'neovim/nvim-lspconfig'
 " lua require'lspconfig'.rust_analyzer.setup({})
@@ -126,7 +126,7 @@ Plugin 'lervag/vimtex'
 let g:tex_flavor='latex' " Avoid plaintex filetype for .tex files
 
 " Trakers
-Plugin 'wakatime/vim-wakatime'
+" Plugin 'wakatime/vim-wakatime'
 
 " Themes
 Plugin 'morhetz/gruvbox'
@@ -217,6 +217,7 @@ autocmd FileType typescript map <leader>f :w<CR>:!tsfmt -r %<cr>
 autocmd FileType go map <leader>f :!go fmt %<cr>
 nmap <leader>ne :NERDTreeToggle<cr>
 map <leader>o :NERDTreeToggle<cr>
+map <leader>i :NERDTreeFind<cr>
 
 :inoremap <F5> <C-R>=strftime("%c")<CR>
 :nnoremap <F5> "=strftime("%c")<CR>P
@@ -274,7 +275,7 @@ function! RunTests(filename, complement)
         exec ":!./node_modules/.bin/testcafe 'chrome' ".a:filename." -t ".a:complement
     endif
   else
-    exec ":!./node_modules/.bin/jest ".a:filename." -t ".a:complement
+    exec ":!./node_modules/.bin/mocha ".a:filename." -g ".a:complement
   endif
 endfunction
 " Thanks https://github.com/chrishunt
