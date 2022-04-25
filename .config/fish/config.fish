@@ -45,7 +45,7 @@ alias gbr='git branch'
 alias gca='git commit -am'
 alias gc='git commit -m'
 alias gco='git checkout'
+set PATH $HOME/.cargo/bin /opt/homebrew/bin /usr/local/bin/ $HOME/.cargo/bin $HOME/git/mfsolutions/nun-db/target/debug $PATH
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk2/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk2/path.fish.inc'; end
-set PATH $HOME/.cargo/bin /opt/homebrew/bin /usr/local/bin/ $HOME/.cargo/bin $HOME/git/mfsolutions/nun-db/target/debug $PATH
+if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk-today/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk-today/path.fish.inc'; end
