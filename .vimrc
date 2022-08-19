@@ -44,6 +44,8 @@ autocmd FileType markdown set spell
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'crusoexia/vim-monokai'
+"set termguicolors
 
 Plugin 'sedm0784/vim-you-autocorrect'
 Plugin 'godlygeek/tabular'
@@ -347,7 +349,9 @@ nnoremap <leader>. :CtrlPTag<cr>
 
 "colorscheme gruvbox
 "colorscheme solarized
-colorscheme dracula
+"colorscheme dracula
+colorscheme monokai
 "colorscheme darkblue
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
+
