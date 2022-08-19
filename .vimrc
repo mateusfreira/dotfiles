@@ -46,6 +46,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'sedm0784/vim-you-autocorrect'
+Plugin 'godlygeek/tabular'
+Plugin 'preservim/vim-markdown'
 Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
