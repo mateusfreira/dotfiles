@@ -18,6 +18,7 @@ set formatoptions-=t " Stop bracking the lines at the limit
 set wrapmargin=0
 
 autocmd FileType gitcommit setlocal spell
+autocmd BufRead *.md :Goyo 80
 
 " Easier split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -48,8 +49,6 @@ Plugin 'crusoexia/vim-monokai'
 "set termguicolors
 
 Plugin 'sedm0784/vim-you-autocorrect'
-Plugin 'godlygeek/tabular'
-Plugin 'preservim/vim-markdown'
 Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
@@ -62,7 +61,6 @@ nmap <leader>a :CocAction<CR>
 " Plugin 'neovim/nvim-lspconfig'
 " Plugin 'nvim-lua/completion-nvim'
 
-Plugin 'shime/vim-livedown'
 Plugin 'vim-scripts/DrawIt'
 
 " let Vundle manage Vundle, required
@@ -161,7 +159,12 @@ Plugin 'emugel/vim-sum'
 nmap <Leader>a <Plug>VimSumOperatorPending
 vmap <Leader>a <Plug>VimSumVisual
 
-" Markdown 
+" Markdown
+" Plugin 'godlygeek/tabular'
+" Plugin 'preservim/vim-markdown'
+Plugin 'instant-markdown/vim-instant-markdown'
+let g:instant_markdown_autostart=0
+" Plugin 'shime/vim-livedown'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 noremap <leader>l :Goyo 36<CR>
@@ -173,6 +176,8 @@ let g:limelight_conceal_guifg = '#777777'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 autocmd BufNewFile _posts/*.md :Goyo 36
+" GO to file in markdown
+autocmd FileType markdown noremap <leader>g yi[:edit <C-R>"<cr>
 
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
@@ -218,6 +223,9 @@ map <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType javascript map <leader>f :call JsBeautify()<cr>
 autocmd FileType typescript map <leader>f :w<CR>:!tsfmt -r %<cr>
 autocmd FileType go map <leader>f :!go fmt %<cr>
+
+noremap <leader>g :ALEGoToDefinition<cr>
+
 nmap <leader>ne :NERDTreeToggle<cr>
 map <leader>o :NERDTreeToggle<cr>
 map <leader>i :NERDTreeFind<cr>
@@ -259,8 +267,6 @@ autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 "Save current file
 nmap <leader>w :w<CR>
 
-" GO to file in markdown
-noremap <leader>g yi[:edit <C-R>"<cr>
 
 set backspace=indent,eol,start
 "Ser current directory to create file
