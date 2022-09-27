@@ -18,7 +18,6 @@ set formatoptions-=t " Stop bracking the lines at the limit
 set wrapmargin=0
 
 autocmd FileType gitcommit setlocal spell
-autocmd BufRead *.md :Goyo 80
 
 " Easier split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -173,9 +172,10 @@ let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
 autocmd BufNewFile _posts/*.md :Goyo 36
+" autocmd BufRead *.md :Goyo 80
 " GO to file in markdown
 autocmd FileType markdown noremap <leader>g yi[:edit <C-R>"<cr>
 
@@ -201,7 +201,7 @@ let g:ale_fixers = {
             \}
 "let g:ale_linters_ignore = {'typescript': ['tslint']}
 
-nnoremap <leader>d :ALEToggle<CR>
+nnoremap <leader>d :ALEGoToDefinition<CR>
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
@@ -209,6 +209,7 @@ Plugin 'dennougorilla/azuki.vim'
 
 " Org mode
 Plugin 'jceb/vim-orgmode'
+Plugin 'wsdjeg/vim-fetch'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -235,6 +236,8 @@ map <leader>i :NERDTreeFind<cr>
 
 nmap <leader>q :on<cr>
 autocmd FileType javascript nmap <leader>t :call RunNearestTest()<cr>
+" Review files
+nmap <leader>k :let @*=fnamemodify(expand("%"), ":~:.").":".line('.')<cr>:edit reviews.md<cr>Go[ ]<Esc>hi
 autocmd FileType cucumber nmap <leader>t :w<CR>:!npm run bdd:ui:file -- %<CR>
 
 function! Wait()
@@ -262,6 +265,7 @@ nmap <leader>v :!pwd <cr>
 
 " In code maps
 autocmd FileType javascript nnoremap <Leader>c viWyoconsole.log();<Esc>hhp0f(lv$hhh
+autocmd FileType javascript nnoremap <Leader>x :call let @*=fnamemodify(expand("%"), ":~:.").":".line('.')
 autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
 autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 "Save current file
