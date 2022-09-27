@@ -18,7 +18,7 @@ set formatoptions-=t " Stop bracking the lines at the limit
 set wrapmargin=0
 
 autocmd FileType gitcommit setlocal spell
-autocmd BufRead *.md :Goyo 80
+" autocmd BufRead *.md :Goyo 80
 
 " Easier split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -165,17 +165,20 @@ vmap <Leader>a <Plug>VimSumVisual
 Plugin 'instant-markdown/vim-instant-markdown'
 let g:instant_markdown_autostart=0
 " Plugin 'shime/vim-livedown'
+" Vim Script
+" Plugin 'folke/zen-mode.nvim'
+Plugin 'Pocco81/true-zen.nvim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
-noremap <leader>l :Goyo 36<CR>
+" noremap <leader>l :Goyo 36<CR>
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-autocmd BufNewFile _posts/*.md :Goyo 36
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+" autocmd BufNewFile _posts/*.md :Goyo 36
 " GO to file in markdown
 autocmd FileType markdown noremap <leader>g yi[:edit <C-R>"<cr>
 
@@ -201,7 +204,7 @@ let g:ale_fixers = {
             \}
 "let g:ale_linters_ignore = {'typescript': ['tslint']}
 
-nnoremap <leader>d :ALEToggle<CR>
+nnoremap <leader>d :ALEGoToDefinition<CR>
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
