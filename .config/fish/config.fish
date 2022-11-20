@@ -48,4 +48,4 @@ alias gco='git checkout'
 set PATH $HOME/.cargo/bin /opt/homebrew/bin /usr/local/bin/ $HOME/.cargo/bin $HOME/git/mfsolutions/nun-db/target/debug $PATH
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk-today/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk-today/path.fish.inc'; end
+if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
