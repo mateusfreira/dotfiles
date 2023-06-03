@@ -46,15 +46,20 @@ autocmd FileType markdown set spell
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'crusoexia/vim-monokai'
+Plugin 'xiyaowong/nvim-transparent'
+let g:transparent_enabled = v:true
 "set termguicolors
+Plugin 'christoomey/vim-tmux-navigator'
 
 Plugin 'sedm0784/vim-you-autocorrect'
 Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
 " :CocInstall coc-rls
-" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-nmap <leader>a :CocAction<CR>
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+nmap <leader>a <Plug>(coc-codeaction)<CR>
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
 " Plugin 'neovim/nvim-lspconfig'
 " lua require'lspconfig'.rust_analyzer.setup({})
 
@@ -66,7 +71,7 @@ Plugin 'vim-scripts/DrawIt'
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Test
-Plugin 'vim-test/vim-test'
+Plugin 'mateusfreira/vim-test'
 
 " Yank highlight 
 Plugin 'machakann/vim-highlightedyank'
@@ -111,6 +116,8 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'pangloss/vim-javascript'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'folke/tokyonight.nvim', { 'branch': 'main' }
+
 
 "Jenkins
 au BufNewFile,BufRead jenkinsfile setf groovy 
@@ -133,6 +140,7 @@ let g:tex_flavor='latex' " Avoid plaintex filetype for .tex files
 Plugin 'morhetz/gruvbox'
 Plugin 'dracula/vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'sainnhe/gruvbox-material'
 
 " Elixir
 Plugin 'elixir-editors/vim-elixir'
@@ -156,7 +164,7 @@ Plugin 'junegunn/fzf.vim'
 
 "Sum numbers
 Plugin 'emugel/vim-sum'
-nmap <Leader>a <Plug>VimSumOperatorPending
+"nmap <Leader>a <Plug>VimSumOperatorPending
 vmap <Leader>a <Plug>VimSumVisual
 
 " Markdown
@@ -164,6 +172,7 @@ vmap <Leader>a <Plug>VimSumVisual
 " Plugin 'preservim/vim-markdown'
 Plugin 'instant-markdown/vim-instant-markdown'
 let g:instant_markdown_autostart=0
+let g:instant_markdown_mermaid = 1
 " Plugin 'shime/vim-livedown'
 " Vim Script
 " Plugin 'folke/zen-mode.nvim'
@@ -205,7 +214,12 @@ let g:ale_fixers = {
             \}
 "let g:ale_linters_ignore = {'typescript': ['tslint']}
 
-nnoremap <leader>d :ALEGoToDefinition<CR>
+nnoremap <leader>d <Plug>(coc-definition)
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
@@ -240,6 +254,8 @@ map <leader>i :NERDTreeFind<cr>
 
 nmap <leader>q :on<cr>
 autocmd FileType javascript nmap <leader>t :call RunNearestTest()<cr>
+autocmd FileType typescript nmap <leader>t :TestNearest<CR>
+autocmd FileType typescript nmap <leader>l :TestLast<CR>
 " Review files
 nmap <leader>k :let @*=fnamemodify(expand("%"), ":~:.").":".line('.')<cr>:edit reviews.md<cr>Go[ ]<Esc>hi
 autocmd FileType cucumber nmap <leader>t :w<CR>:!npm run bdd:ui:file -- %<CR>
@@ -268,9 +284,10 @@ autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
 nmap <leader>v :!pwd <cr>
 
 " In code maps
-autocmd FileType javascript nnoremap <Leader>c viWyoconsole.log();<Esc>hhp0f(lv$hhh
+autocmd FileType javascript nnoremap <Leader>c viwyoconsole.log();<Esc>hhp0f(lv$hhh
+autocmd FileType typescript nnoremap <Leader>c viwyoconsole.log();<Esc>hhp0f(lv$hhh
 autocmd FileType javascript nnoremap <Leader>x :call let @*=fnamemodify(expand("%"), ":~:.").":".line('.')
-autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
+" autocmd FileType javascript nnoremap <Leader>a viwyoconsole.log();<Esc>hhp
 autocmd FileType tex nnoremap <Leader>a ciw\ac{}<Esc>hp
 "Save current file
 nmap <leader>w :w<CR>
@@ -292,7 +309,7 @@ function! RunTests(filename, complement)
         exec ":!./node_modules/.bin/testcafe 'chrome' ".a:filename." -t ".a:complement
     endif
   else
-    exec ":!./node_modules/.bin/mocha ".a:filename." -g ".a:complement
+    exec ":!./node_modules/.bin/jest ".a:filename." -t ".a:complement
   endif
 endfunction
 " Thanks https://github.com/chrishunt
@@ -364,8 +381,30 @@ nnoremap <leader>. :CtrlPTag<cr>
 "colorscheme gruvbox
 "colorscheme solarized
 "colorscheme dracula
-colorscheme monokai
-"colorscheme darkblue
+" colorscheme monokai
+" colorscheme gruvbox-material
+" colorscheme darkblue
+colorscheme tokyonight-storm
+
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
 
+" Nvim
+:tnoremap <A-h> <C-\><C-N><C-w>h
+:tnoremap <A-j> <C-\><C-N><C-w>j
+:tnoremap <A-k> <C-\><C-N><C-w>k
+:tnoremap <A-l> <C-\><C-N><C-w>l
+:inoremap <A-h> <C-\><C-N><C-w>h
+:inoremap <A-j> <C-\><C-N><C-w>j
+:inoremap <A-k> <C-\><C-N><C-w>k
+:inoremap <A-l> <C-\><C-N><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
+
+" Nvim
+lua require('plugins')
+
+" Mouse
+set mouse=
