@@ -2,7 +2,7 @@
 SESSION="blog"
 cd ./notes/blog
 tmux -2 new-session -d -s $SESSION
-tmux send-keys "vim" C-m
+tmux send-keys "nvim" C-m
 #Open terminal
 tmux new-window -t $SESSION:1 -n 'bash'
 #Open server

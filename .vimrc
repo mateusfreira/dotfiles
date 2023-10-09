@@ -72,6 +72,7 @@ Plugin 'vim-scripts/DrawIt'
 Plugin 'VundleVim/Vundle.vim'
 " Test
 Plugin 'mateusfreira/vim-test'
+" let test#strategy = "neovim"
 
 " Yank highlight 
 Plugin 'machakann/vim-highlightedyank'
@@ -134,7 +135,7 @@ Plugin 'lervag/vimtex'
 let g:tex_flavor='latex' " Avoid plaintex filetype for .tex files
 
 " Trakers
-" Plugin 'wakatime/vim-wakatime'
+Plugin 'wakatime/vim-wakatime'
 
 " Themes
 Plugin 'morhetz/gruvbox'
@@ -191,6 +192,7 @@ let g:limelight_conceal_guifg = '#777777'
 " autocmd BufNewFile _posts/*.md :Goyo 36
 " GO to file in markdown
 autocmd FileType markdown noremap <leader>g yi[:edit <C-R>"<cr>
+autocmd FileType markdown xmap <leader>e :'<,'>w !node<cr>
 
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-b> :Buffers<CR>
@@ -228,6 +230,8 @@ Plugin 'dennougorilla/azuki.vim'
 " Org mode
 Plugin 'jceb/vim-orgmode'
 Plugin 'wsdjeg/vim-fetch'
+Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -253,11 +257,13 @@ map <leader>i :NERDTreeFind<cr>
 :nnoremap <F5> "=strftime("%c")<CR>P
 
 nmap <leader>q :on<cr>
-autocmd FileType javascript nmap <leader>t :call RunNearestTest()<cr>
+" autocmd FileType javascript nmap <leader>t :call RunNearestTest()<cr>
+autocmd FileType javascript nmap <leader>t :TestNearest<CR>
 autocmd FileType typescript nmap <leader>t :TestNearest<CR>
 autocmd FileType typescript nmap <leader>l :TestLast<CR>
+autocmd FileType javascript nmap <leader>l :TestLast<CR>
 " Review files
-nmap <leader>k :let @*=fnamemodify(expand("%"), ":~:.").":".line('.')<cr>:edit reviews.md<cr>Go[ ]<Esc>hi
+nmap <leader>k :let @*=fnamemodify(expand("%"), ":~:.").":".line('.')<cr>:edit todo.md<cr>Go[ ]<Esc>hi
 autocmd FileType cucumber nmap <leader>t :w<CR>:!npm run bdd:ui:file -- %<CR>
 
 function! Wait()
@@ -273,12 +279,17 @@ autocmd FileType rust nmap <leader>y :!cargo test<cr>
 autocmd FileType javascript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
 autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p tsconfig.json % <cr>
 autocmd FileType rust nmap <leader>e :w<CR>:!cargo fmt <cr>
+" Exec the current line as a command
+autocmd FileType markdown nmap <leader>e :exec 'r!'.getline('.')<CR>
+
 
 "Run current file
 autocmd FileType javascript nmap <leader>r :w<CR>:!node --inspect %  <cr>
 autocmd FileType python nmap <leader>r :w<CR>:!python3  % <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
+autocmd FileType markdown nmap <leader>r :w<CR>:InstantMarkdownPreview<cr>
+autocmd FileType markdown vmap <leader>r :'<,'>:w !espeak -v en-gb<cr>
 
 "Shows the console :)
 nmap <leader>v :!pwd <cr>

@@ -38,7 +38,7 @@ function fish_prompt --description 'Write out the prompt'
 
     end
 end
-# source "$HOME/tokens.sh" # Toggle and others
+source "$HOME/tokens.sh" # Toggle and others
 alias gpb="git push origin (git rev-parse --abbrev-ref HEAD)"
 alias gst='git status'
 alias gbr='git branch'
@@ -46,6 +46,25 @@ alias gca='git commit -am'
 alias gc='git commit -m'
 alias gco='git checkout'
 set PATH $HOME/.cargo/bin /opt/homebrew/bin /usr/local/bin/ $HOME/.cargo/bin $HOME/git/mfsolutions/nun-db/target/debug $PATH
+set CDPATH $HOME ../ $HOME/git $HOME/git/mfsolutions $HOME/git/radicalimage
+fish_vi_key_bindings
+function fish_user_key_bindings
+    bind --erase --preset \cp up-or-search # ctrl-p
+    bind -m insert \cp up-or-search
+    bind -m insert \cn down-or-search
+    bind -m normal \cn down-or-search
+    bind -m normal \cp up-or-search
+    bind -m default \cp up-or-search
+end
+
+fish_vi_key_bindings
+fish_user_key_bindings
+# The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
+
+
+# The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
