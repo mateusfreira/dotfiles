@@ -4,7 +4,7 @@ function fish_prompt --description 'Write out the prompt'
     set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
     end
     #set kubenv "#"(set_color red)(hostname|cut -d . -f 1)
-    set kubenv "#"(set_color red)(kubectl config current-context)
+    #set kubenv "#"(set_color red)(kubectl config current-context)
 
     if not set -q __fish_prompt_normal
     set -g __fish_prompt_normal (set_color normal)
@@ -68,3 +68,4 @@ fish_user_key_bindings
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
+fish_add_path /opt/homebrew/opt/curl/bin

@@ -393,7 +393,8 @@ font:
 
 # Live config reload (changes require restart)
 #live_config_reload: true
-
+shell:
+  program: /opt/homebrew/bin/fish
 # Shell
 #
 # You can set `shell.program` to the path of your favorite shell, e.g.

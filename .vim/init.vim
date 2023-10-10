@@ -1,1 +1,1 @@
-/Users/mateusfreira/.vimrc
+/Users/mateus/.vimrc

@@ -40,5 +40,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 . "$HOME/.cargo/env"
 export PATH=/Users/mateusfreira/.meteor:$PATH
+export PATH=/opt/homebrew/bin:$PATH
 
 complete -C /opt/homebrew/bin/terraform terraform
