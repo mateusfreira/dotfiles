@@ -264,7 +264,7 @@ autocmd FileType typescript nmap <leader>l :TestLast<CR>
 autocmd FileType javascript nmap <leader>l :TestLast<CR>
 " Review files
 nmap <leader>k :let @*=fnamemodify(expand("%"), ":~:.").":".line('.')<cr>:edit todo.md<cr>Go[ ]<Esc>hi
-nmap <leader>u  o![](<Esc>:r !~/upload-last-image.sh<CR>kdt!JxA)<esc>0F<space>x
+nmap <leader>u  o![](<Esc>:r !~/upload-last-image.sh<CR>kJxA)<esc>0F<space>x
 
 autocmd FileType cucumber nmap <leader>t :w<CR>:!npm run bdd:ui:file -- %<CR>
 
