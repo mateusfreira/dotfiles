@@ -264,7 +264,12 @@ autocmd FileType typescript nmap <leader>l :TestLast<CR>
 autocmd FileType javascript nmap <leader>l :TestLast<CR>
 " Review files
 nmap <leader>k :let @*=fnamemodify(expand("%"), ":~:.").":".line('.')<cr>:edit todo.md<cr>Go[ ]<Esc>hi
+" Upload last image from desktop
 nmap <leader>u  o![](<Esc>:r !~/upload-last-image.sh<CR>kJxA)<esc>0F<space>x
+nmap <leader>n  :call ChooseDocument()<cr>
+
+" Reference the last visit file
+nmap <leader>p  o[<Esc>"#pA]<Esc>
 
 autocmd FileType cucumber nmap <leader>t :w<CR>:!npm run bdd:ui:file -- %<CR>
 
@@ -423,3 +428,28 @@ lua require('chatgpt').setup()
 
 " Mouse
 set mouse=
+autocmd TermOpen * startinsert
+
+function! NewProblem()
+  let name = input('Enter Problem name: ')
+  exec "e `./new-problem.sh " . name . "`"
+endfunction
+function! NewMeeting()
+  let name = input('Enter Problem name: ')
+  exec "e `./new-meeting.sh " . name . "`"
+endfunction
+
+function! NewDay()
+  exec "e `./new-day.sh`"
+endfunction
+
+function! ChooseDocument()
+  let doc_kind = inputlist(['What document?', 'Day', 'Meeting', 'Problem'])
+  if doc_kind == 1
+    call NewDay()
+  elseif doc_kind == 2
+    call NewMeeting()
+  elseif doc_kind == 3
+    call NewProblem()
+  endif
+endfunction
