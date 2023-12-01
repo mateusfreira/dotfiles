@@ -206,7 +206,7 @@ map <leader>s :Ag!<space>
 nnoremap <leader><leader> <c-^>
 
 "Code style checking
-Plugin 'w0rp/ale'
+" Plugin 'w0rp/ale'
 let g:ale_linters = {
 \   'javascript': ['eslint'], 'typescript': ['tslint', 'tsserver'],
 \   'markdown':      ['mdl', 'writegood'],
@@ -395,9 +395,9 @@ nnoremap <leader>. :CtrlPTag<cr>
 "colorscheme solarized
 "colorscheme dracula
 " colorscheme monokai
-" colorscheme gruvbox-material
+colorscheme gruvbox-material
 " colorscheme darkblue
-colorscheme tokyonight-storm
+" colorscheme tokyonight-storm
 
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
