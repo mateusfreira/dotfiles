@@ -45,6 +45,9 @@ autocmd FileType markdown set spell
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'nvim-tree/nvim-web-devicons' " optional
+Plugin 'nvim-tree/nvim-tree.lua'
+
 Plugin 'crusoexia/vim-monokai'
 Plugin 'xiyaowong/nvim-transparent'
 let g:transparent_enabled = v:true
@@ -99,9 +102,9 @@ let g:airline_theme = 'sol'
 " Vim enhancements
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 " Let nerdtree like textmake
-let g:NERDTreeWinPos = "right" 
+" let g:NERDTreeWinPos = "right" 
 
 
 " Snipets
@@ -249,9 +252,8 @@ autocmd FileType go map <leader>f :!go fmt %<cr>
 
 noremap <leader>g :ALEGoToDefinition<cr>
 
-nmap <leader>ne :NERDTreeToggle<cr>
-map <leader>o :NERDTreeToggle<cr>
-map <leader>i :NERDTreeFind<cr>
+map <leader>o :NvimTreeToggle<cr>
+map <leader>i :NvimTreeFindFile<cr>
 
 :inoremap <F5> <C-R>=strftime("%c")<CR>
 :nnoremap <F5> "=strftime("%c")<CR>P
