@@ -59,7 +59,7 @@ Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
 " :CocInstall coc-rls
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+"Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 nmap <leader>a <Plug>(coc-codeaction)<CR>
 xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 
@@ -145,6 +145,8 @@ Plugin 'morhetz/gruvbox'
 Plugin 'dracula/vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'sainnhe/gruvbox-material'
+Plugin 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 
 " Elixir
 Plugin 'elixir-editors/vim-elixir'
@@ -209,7 +211,7 @@ map <leader>s :Ag!<space>
 nnoremap <leader><leader> <c-^>
 
 "Code style checking
-" Plugin 'w0rp/ale'
+Plugin 'w0rp/ale'
 let g:ale_linters = {
 \   'javascript': ['eslint'], 'typescript': ['tslint', 'tsserver'],
 \   'markdown':      ['mdl', 'writegood'],
@@ -293,7 +295,7 @@ autocmd FileType python nmap <leader>r :w<CR>:!python3  % <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
 autocmd FileType markdown nmap <leader>r :w<CR>:InstantMarkdownPreview<cr>
-autocmd FileType markdown vmap <leader>r :'<,'>:w !espeak -v en-gb<cr>
+" autocmd FileType markdown vmap <leader>r :'<,'>:w !espeak -v en-gb<cr>
 
 "Shows the console :)
 nmap <leader>v :!pwd <cr>
@@ -393,13 +395,14 @@ set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
 
 
-"colorscheme gruvbox
+colorscheme gruvbox
 "colorscheme solarized
 "colorscheme dracula
 " colorscheme monokai
-colorscheme gruvbox-material
+" colorscheme gruvbox-material
 " colorscheme darkblue
 " colorscheme tokyonight-storm
+ " colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
