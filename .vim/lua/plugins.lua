@@ -33,13 +33,14 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
     use({
       "jackMort/ChatGPT.nvim",
-      commit = "d4aa4d9e31d620a0c01006e59f4449ffc7eb33ce",
+      commit = "df53728e05129278d6ea26271ec086aa013bed90",
       config = function()
-        require("chatgpt").setup({
-        keymaps = {
-          submit = "<C-s>"
-        }
-        })
+         require("chatgpt").setup()
+        -- require("chatgpt").setup({
+        --keymaps = {
+        --  submit = "<C-s>"
+        -- }
+        -- })
       end,
       requires = {
         "MunifTanjim/nui.nvim",
