@@ -60,13 +60,12 @@ Plugin 'kristijanhusak/vim-carbon-now-sh'
 " Use release branch (Recommend)
 " To run rust  rustup component add rls rust-analysis rust-src
 " :CocInstall coc-rls
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-nmap <leader>a <Plug>(coc-codeaction)<CR>
-xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-
+" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+" nmap <leader>a <Plug>(coc-codeaction)<CR>
+" xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+map <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+xmap <silent> <leader>r   <cmd>lua vim.lsp.buf.code_action()<CR>
 " Plugin 'neovim/nvim-lspconfig'
-" lua require'lspconfig'.rust_analyzer.setup({})
-
 " Plugin 'neovim/nvim-lspconfig'
 " Plugin 'nvim-lua/completion-nvim'
 
@@ -121,7 +120,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'pangloss/vim-javascript'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plugin 'folke/tokyonight.nvim'
 
 
 "Jenkins
@@ -250,7 +249,8 @@ set cindent
 nnoremap ; :
 map <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType javascript map <leader>f :call JsBeautify()<cr>
-autocmd FileType typescript map <leader>f :w<CR>:!tsfmt -r %<cr>
+autocmd FileType typescript map <leader>f :call JsBeautify()<cr>
+" autocmd FileType typescript map <leader>f :w<CR>:!JsBeautify() -r %<cr>
 autocmd FileType go map <leader>f :!go fmt %<cr>
 
 noremap <leader>g :ALEGoToDefinition<cr>
@@ -292,7 +292,8 @@ nmap <leader>y :call RunTestFile()<cr>
 autocmd FileType rust nmap <leader>y :!cargo test<cr>
 
 autocmd FileType javascript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
-autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p tsconfig.json % <cr>
+autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/eslint % --fix <cr>
+" autocmd FileType typescript nmap <leader>e :w<CR>:!node_modules/.bin/tslint -p tsconfig.json % <cr>
 autocmd FileType rust nmap <leader>e :w<CR>:!cargo fmt <cr>
 " Exec the current line as a command
 autocmd FileType markdown nmap <leader>e :exec 'r!'.getline('.')<CR>
@@ -304,7 +305,7 @@ autocmd FileType javascript nmap <leader>r :w<CR>:!node --inspect %  <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
 autocmd FileType markdown nmap <leader>r :w<CR>:InstantMarkdownPreview<cr>
-autocmd FileType markdown vmap <leader>r :'<,'>:w !espeak -v en-gb<cr>
+" autocmd FileType markdown vmap <leader>r :'<,'>:w !espeak -v en-gb<cr>
 
 "Shows the console :)
 nmap <leader>v :!pwd <cr>
@@ -410,15 +411,19 @@ set tags+=tags;/
 nnoremap <leader>. :CtrlPTag<cr>
 
 
-"colorscheme gruvbox
-"colorscheme solarized
-"colorscheme dracula
+" colorscheme gruvbox
+" colorscheme solarized
+" colorscheme dracula
 " colorscheme monokai
 " colorscheme gruvbox-material
-colorscheme catppuccin-mocha  "catppuccin catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-
 " colorscheme darkblue
 " colorscheme tokyonight-storm
+" colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+" colorscheme tokyonight-night
+" colorscheme tokyonight-storm
+" colorscheme tokyonight-day
+colorscheme tokyonight-moon
+let g:lightline = {'colorscheme': 'tokyonight-moon'}
 
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
