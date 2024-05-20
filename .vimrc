@@ -28,7 +28,8 @@ nnoremap <C-H> <C-W><C-H>
 
 " Copy to keyboard
 " @todo Need a better key map here
-xnoremap yy :w !pbcopy<CR><CR> 
+" xnoremap yy :w !pbcopy<CR><CR> 
+xnoremap yy "*y
 " Unmap the arroul keys in nomal mode
 noremap <Down> <Nop>
 noremap <Left> <Nop>
@@ -145,6 +146,8 @@ Plugin 'morhetz/gruvbox'
 Plugin 'dracula/vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'sainnhe/gruvbox-material'
+Plugin 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 
 " Elixir
 Plugin 'elixir-editors/vim-elixir'
@@ -169,7 +172,7 @@ Plugin 'junegunn/fzf.vim'
 "Sum numbers
 Plugin 'emugel/vim-sum'
 "nmap <Leader>a <Plug>VimSumOperatorPending
-vmap <Leader>a <Plug>VimSumVisual
+"vmap <Leader>a <Plug>VimSumVisual
 
 " Markdown
 " Plugin 'godlygeek/tabular'
@@ -282,6 +285,9 @@ endfunction
 autocmd FileType rust nmap <leader>t :TestNearest<CR>
 autocmd FileType rust nmap <leader>l :TestLast<CR>
 
+autocmd FileType python nmap <leader>t :TestNearest<CR>
+autocmd FileType python nmap <leader>l :TestLast<CR>
+
 nmap <leader>y :call RunTestFile()<cr>
 autocmd FileType rust nmap <leader>y :!cargo test<cr>
 
@@ -294,7 +300,7 @@ autocmd FileType markdown nmap <leader>e :exec 'r!'.getline('.')<CR>
 
 "Run current file
 autocmd FileType javascript nmap <leader>r :w<CR>:!node --inspect %  <cr>
-autocmd FileType python nmap <leader>r :w<CR>:!python3  % <cr>
+" autocmd FileType python nmap <leader>r :w<CR>:!python3  % <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
 autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
 autocmd FileType markdown nmap <leader>r :w<CR>:InstantMarkdownPreview<cr>
@@ -302,6 +308,12 @@ autocmd FileType markdown vmap <leader>r :'<,'>:w !espeak -v en-gb<cr>
 
 "Shows the console :)
 nmap <leader>v :!pwd <cr>
+
+" Fix list moving
+" Move to the next error
+nnoremap <leader>cn :cn<CR>zz
+" Move to the previous error
+nnoremap <leader>cp :cp<CR>zz
 
 " In code maps
 autocmd FileType javascript nnoremap <Leader>c viwyoconsole.log();<Esc>hhp0f(lv$hhh
@@ -402,7 +414,9 @@ nnoremap <leader>. :CtrlPTag<cr>
 "colorscheme solarized
 "colorscheme dracula
 " colorscheme monokai
-colorscheme gruvbox-material
+" colorscheme gruvbox-material
+colorscheme catppuccin-mocha  "catppuccin catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+
 " colorscheme darkblue
 " colorscheme tokyonight-storm
 
@@ -461,3 +475,4 @@ function! ChooseDocument()
     call NewTask()
   endif
 endfunction
+"  nmap <leader>n  :call ChooseDocument()<cr>

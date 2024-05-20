@@ -69,3 +69,4 @@ fish_user_key_bindings
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/mateusfreira/Downloads/google-cloud-sdk/path.fish.inc'; end
 fish_add_path /opt/homebrew/opt/curl/bin
+fish_add_path /opt/homebrew/opt/openjdk/bin
