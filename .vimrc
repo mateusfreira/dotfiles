@@ -10,8 +10,10 @@ syntax on               " syntax highlighting
 set incsearch
 set ignorecase
 set smartcase           "If captital search by case sensitive
-set t_Co=256
-set background=dark
+" set t_Co=256
+" set background=dark
+let g:impact_transbg=1
+
 set colorcolumn=+1
 set textwidth=100
 set formatoptions-=t " Stop bracking the lines at the limit
@@ -50,8 +52,8 @@ Plugin 'nvim-tree/nvim-web-devicons' " optional
 Plugin 'nvim-tree/nvim-tree.lua'
 
 Plugin 'crusoexia/vim-monokai'
-Plugin 'xiyaowong/nvim-transparent'
-let g:transparent_enabled = v:true
+" Plugin 'xiyaowong/nvim-transparent'
+" let g:transparent_enabled = v:true
 "set termguicolors
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -415,15 +417,15 @@ nnoremap <leader>. :CtrlPTag<cr>
 " colorscheme solarized
 " colorscheme dracula
 " colorscheme monokai
-" colorscheme gruvbox-material
+"colorscheme gruvbox-material
 " colorscheme darkblue
 " colorscheme tokyonight-storm
 " colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-" colorscheme tokyonight-night
+colorscheme tokyonight-night
 " colorscheme tokyonight-storm
 " colorscheme tokyonight-day
-colorscheme tokyonight-moon
-let g:lightline = {'colorscheme': 'tokyonight-moon'}
+" colorscheme tokyonight-moon
+" let g:lightline = {'colorscheme': 'tokyonight-day'}
 
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
