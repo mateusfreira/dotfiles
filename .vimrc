@@ -51,6 +51,7 @@ call vundle#begin()
 Plugin 'nvim-tree/nvim-web-devicons' " optional
 Plugin 'nvim-tree/nvim-tree.lua'
 
+Plugin 'rebelot/kanagawa.nvim'
 Plugin 'crusoexia/vim-monokai'
 " Plugin 'xiyaowong/nvim-transparent'
 " let g:transparent_enabled = v:true
@@ -223,7 +224,7 @@ let g:ale_fixers = {
             \}
 "let g:ale_linters_ignore = {'typescript': ['tslint']}
 
-nnoremap <leader>d <Plug>(coc-definition)
+nnoremap <leader>d <cmd>lua vim.lsp.buf.declaration()<CR>
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -255,7 +256,7 @@ autocmd FileType typescript map <leader>f :call JsBeautify()<cr>
 " autocmd FileType typescript map <leader>f :w<CR>:!JsBeautify() -r %<cr>
 autocmd FileType go map <leader>f :!go fmt %<cr>
 
-noremap <leader>g :ALEGoToDefinition<cr>
+noremap <leader>g <cmd>lua vim.lsp.buf.declaration()<cr>
 
 map <leader>o :NvimTreeToggle<cr>
 map <leader>i :NvimTreeFindFile<cr>
@@ -421,10 +422,11 @@ nnoremap <leader>. :CtrlPTag<cr>
 " colorscheme darkblue
 " colorscheme tokyonight-storm
 " colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-colorscheme tokyonight-night
+" colorscheme tokyonight-night
 " colorscheme tokyonight-storm
 " colorscheme tokyonight-day
 " colorscheme tokyonight-moon
+colorscheme kanagawa-wave
 " let g:lightline = {'colorscheme': 'tokyonight-day'}
 
 autocmd FileType tex set textwidth=0
