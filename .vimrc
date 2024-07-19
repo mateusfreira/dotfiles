@@ -10,6 +10,7 @@ syntax on               " syntax highlighting
 set incsearch
 set ignorecase
 set smartcase           "If captital search by case sensitive
+set splitbelow          " set default split to below  mostly for quickfix
 " set t_Co=256
 " set background=dark
 let g:impact_transbg=1
@@ -102,6 +103,7 @@ let g:airline_theme = 'sol'
 " let g:deoplete#enable_at_startup = 1
 
 " Vim enhancements
+Plugin 'terrastruct/d2-vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 " Plugin 'scrooloose/nerdtree'
@@ -426,6 +428,7 @@ colorscheme tokyonight-night
 " colorscheme tokyonight-day
 " colorscheme tokyonight-moon
 " let g:lightline = {'colorscheme': 'tokyonight-day'}
+" let g:lightline = {'colorscheme': 'tokyonight-moon'}
 
 autocmd FileType tex set textwidth=0
 autocmd FileType markdown set textwidth=0
