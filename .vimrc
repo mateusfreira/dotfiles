@@ -68,7 +68,7 @@ Plugin 'kristijanhusak/vim-carbon-now-sh'
 " nmap <leader>a <Plug>(coc-codeaction)<CR>
 " xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 map <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-xmap <silent> <leader>r   <cmd>lua vim.lsp.buf.code_action()<CR>
+xmap <silent> <leader>r <cmd>lua vim.lsp.buf.code_action()<CR>
 " Plugin 'neovim/nvim-lspconfig'
 " Plugin 'neovim/nvim-lspconfig'
 " Plugin 'nvim-lua/completion-nvim'
@@ -213,6 +213,7 @@ nnoremap <C-f>l :BLines<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-t> :Tags<CR>
 map <leader>s :Ag!<space>
+map <leader>ss :Ag!<space><c-R>"
 nnoremap <leader><leader> <c-^>
 
 "Code style checking
@@ -308,7 +309,7 @@ autocmd FileType markdown nmap <leader>e :exec 'r!'.getline('.')<CR>
 autocmd FileType javascript nmap <leader>r :w<CR>:!node --inspect %  <cr>
 " autocmd FileType python nmap <leader>r :w<CR>:!python3  % <cr>
 autocmd FileType go nmap <leader>r :w<CR>:!go run  %<cr>
-autocmd FileType rust nmap <leader>r :w<CR>:!cargo build<cr>
+autocmd FileType rust nmap <leader>r :w<CR>:!cargo run<cr>
 autocmd FileType markdown nmap <leader>r :w<CR>:InstantMarkdownPreview<cr>
 " autocmd FileType markdown vmap <leader>r :'<,'>:w !espeak -v en-gb<cr>
 

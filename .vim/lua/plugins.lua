@@ -32,7 +32,6 @@ return require('packer').startup(function(use)
     use {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
     }
     -- completion
     use {
@@ -48,15 +47,14 @@ return require('packer').startup(function(use)
 
     use({
       "jackMort/ChatGPT.nvim",
-      commit = "df53728e05129278d6ea26271ec086aa013bed90",
+      commit = "f081338f07216a46d3915ce46c1fcb083bcb5016",
       config = function()
-         require("chatgpt").setup()
-        -- require("chatgpt").setup({
-        --keymaps = {
-        --  submit = "<C-s>"
-        -- }
-        -- })
-      end,
+         require("chatgpt").setup({
+             openai_params = {
+                model = "gpt-4-1106-preview",
+             }
+         })
+       end,
       requires = {
         "MunifTanjim/nui.nvim",
         "nvim-lua/plenary.nvim",
