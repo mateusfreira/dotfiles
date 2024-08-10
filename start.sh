@@ -39,4 +39,6 @@ git clone https://github.com/github/copilot.vim.git \
   ~/.vim/pack/github/start/copilot.vim
 
 npm i -g pyright
+brew install skhd
+brew install koekeishiya/formulae/yabai
 
