@@ -151,6 +151,8 @@ Plugin 'dracula/vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'sainnhe/gruvbox-material'
 Plugin 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plugin 'shaunsingh/nord.nvim'
+
 
 
 " Elixir
@@ -428,8 +430,9 @@ nnoremap <leader>. :CtrlPTag<cr>
 " colorscheme tokyonight-night
 " colorscheme tokyonight-storm
 " colorscheme tokyonight-day
-" colorscheme tokyonight-moon
-colorscheme kanagawa-wave
+colorscheme tokyonight-moon
+" colorscheme kanagawa-wave
+" colorscheme nord
 " let g:lightline = {'colorscheme': 'tokyonight-day'}
 " let g:lightline = {'colorscheme': 'tokyonight-moon'}
 

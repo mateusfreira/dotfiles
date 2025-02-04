@@ -74,6 +74,7 @@ ctrl + alt - r : yabai --restart-service
 
 
 # Resize
-shift+cmd - l : yabai -m window --resize left:20:0
+#shift+cmd - l : yabai -m window --resize left:20:0
+shift+cmd - l : yabai -m window --resize right:20:0
 shift+cmd - h: yabai -m window --resize right:-20:0
 

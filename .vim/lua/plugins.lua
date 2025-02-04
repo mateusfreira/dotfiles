@@ -47,7 +47,7 @@ return require('packer').startup(function(use)
 
     use({
       "jackMort/ChatGPT.nvim",
-      commit = "f081338f07216a46d3915ce46c1fcb083bcb5016",
+      commit = "4d9d297c2409c8ebc715da7f1d7705a221564555",
       config = function()
          require("chatgpt").setup({
              openai_params = {
