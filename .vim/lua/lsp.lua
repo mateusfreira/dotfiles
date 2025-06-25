@@ -9,6 +9,8 @@ lspconfig.rust_analyzer.setup {
   },
 }
 
+require("codecompanion").setup({});
+
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
